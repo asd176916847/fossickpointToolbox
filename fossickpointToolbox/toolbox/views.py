@@ -21,7 +21,7 @@ def user_login(request):
             request.session['uuid'] = user.id
             return JsonResponse({"status": 0})
         else:
-            return JsonResponse({"status": -1})
+            return JsonResponse({"status": 1})
 
 def user_register(request):
     return render(request,"toolbox/register.html")
