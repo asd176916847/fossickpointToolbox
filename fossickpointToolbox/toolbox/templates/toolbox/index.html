@@ -5,7 +5,7 @@
     {% load static %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SARMS-Login</title>
+    <title>FossickPoint Toolbox</title>
     <meta name="description" content="这是一个 index 页面">
     <meta name="keywords" content="index">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="{% static 'toolbox/css/amazeui.min.css' %}" />
     <link rel="stylesheet" href="{% static 'toolbox/css/amazeui.datatables.min.css' %}" />
     <link rel="stylesheet" href="{% static 'toolbox/css/app.css' %}">
+    <link rel="icon" href="http://fossickpoint.com.au/wp-content/uploads/2017/04/cropped-FP-DOT_20170426-32x32.png" sizes="32x32" />
+    <link rel="icon" href="http://fossickpoint.com.au/wp-content/uploads/2017/04/cropped-FP-DOT_20170426-192x192.png" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="http://fossickpoint.com.au/wp-content/uploads/2017/04/cropped-FP-DOT_20170426-180x180.png" />
     <script src="{% static 'toolbox/js/jquery.min.js' %}"></script>
 
 </head>
@@ -31,6 +34,7 @@
 
                 </div>
 
+                <legend>Log in</legend>
 
 
                 <!--<form class="am-form tpl-form-line-form">-->
@@ -60,28 +64,9 @@
             </div>
         </div>
 
-        <div id="registerBox" class="tpl-login">
-            <div class="tpl-login-content">
-            
-            <div class="am-form">
-                <fieldset>
-                    <legend>Register</legend>
-                    <div class="am-form-group">
-                        <label for="doc-ipt-username-1">Username:</label>
-                        <input type="text" class="" id="doc-ipt-username-1" placeholder="Please input username">
-                    </div>
-                    <div class="am-form-group">
-                        <label for="doc-ipt-password-1">Password:</label>
-                        <input type="password" class="" id="doc-ipt-password-1" placeholder="Please input password">
-                    </div>
-                </fieldset>
-            </div>
-            </div>
-        </div>
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#login").click(function () {
-                    alert($("#userName").val());
                     $.post("login/", { "userName": $("#userName").val(), "password": $("#password").val(), csrfmiddlewaretoken: '{{ csrf_token }}' }, function (result) {
                         if (result["status"] == 0) {
                             location.href = "./home";

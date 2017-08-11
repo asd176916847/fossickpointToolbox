@@ -15,6 +15,6 @@ class PersonalInfo(models.Model):
     gender = models.IntegerField(default=0)  #0:male 1:female
     age = models.IntegerField(default=20)
     hobby = models.CharField(max_length=100)
-
+    email = models.CharField(max_length=100,default=" ")
     def __str__(self):
         return self.user.userName
