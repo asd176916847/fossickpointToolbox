@@ -1,0 +1,34 @@
+{% extends 'toolbox/_base.html' %}
+{% block main %}
+            <div class="row-content am-cf">
+                <div class="am-u-sm-18 am-u-md-9 am-u-lg-6">
+                    <div class="widget widget-primary am-cf">
+                        <div class="widget-statistic-header" style="font-size:18px">
+                            Content count
+                        </div>
+                        <div class="widget-statistic-body">
+                            <div class="widget-statistic-value" align = "center">
+                                <a href="../content">{{contentCount}}</a>
+                            </div>
+
+                            <span class="widget-statistic-icon am-icon-credit-card-alt"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-u-sm-18 am-u-md-9 am-u-lg-6">
+                    <div class="widget widget-primary am-cf">
+                        <div class="widget-statistic-header" style="font-size:18px" >
+                            User Count
+                        </div>
+                        <div class="widget-statistic-body">
+                            <div class="widget-statistic-value" align = "center">
+                                {{userCount}}
+                            </div>
+
+                            <span class="widget-statistic-icon am-icon-credit-card-alt"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+{% endblock %}

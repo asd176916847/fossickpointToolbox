@@ -1,0 +1,188 @@
+{% extends 'toolbox/_base.html' %}
+{% load static %}
+{% block csslink %}
+<!--<link rel="stylesheet" href="{% static 'toolbox/css/content.css' %}" />-->
+<script src="{% static 'toolbox/js/content.js' %}"></script>
+<script src="{% static 'toolbox/js/layer.js' %}"></script>
+
+{% endblock %}
+{% block title %}
+    Contents
+{% endblock %}
+
+{% block main %}
+
+            <div class="row-content am-cf">
+                <div class="row">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                        <div class="widget am-cf">
+                            <div class="widget-head am-cf">
+                                <div class="widget-title  am-cf">Content list</div>
+
+
+                            </div>
+                            <div class="widget-body  am-fr">
+
+                                <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
+                                    <div class="am-form-group">
+                                        <div class="am-btn-toolbar">
+                                            <div class="am-btn-group am-btn-group-xs">
+                                                <button type="button" class="am-btn am-btn-default am-btn-danger" id="add">
+                                                    <span class="am-icon-plus"></span> Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
+                                    <div class="am-form-group tpl-table-list-select">
+                                        <select data-am-selected="{btnSize: 'sm'}">
+              <option value="option1">All types</option>
+              <option value="option2">PDF</option>
+              <option value="option3">DOC</option>
+              <option value="option4">VEDIO</option>
+              <option value="option5">AUDIO</option>
+              <option value="option6">IMAGE</option>
+              <option value="option7">OTHER</option>
+            </select>
+                                    </div>
+                                </div>
+                                <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
+                                    <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
+                                        <input type="text" class="am-form-field ">
+                                        <span class="am-input-group-btn">
+            <button class="am-btn  am-btn-default am-btn-danger tpl-table-list-field am-icon-search" type="button"></button>
+          </span>
+                                    </div>
+                                </div>
+
+                                <div class="am-u-sm-12">
+                                    <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r">
+                                        <thead>
+                                            <tr>
+                                                <th>Content name</th>
+                                                <th>Tag</th>
+                                                <th>Keyword</th>
+                                                <th>Operation</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="contentTable">
+                                        {% if contentList %}
+                                            {% for content in contentList %}
+                                            <tr class="gradeX">
+                                                <td>{{content.name}}</td>
+                                                <td>{{content.tag}}</td>
+                                                <td>{{content.keyword}}</td>
+                                                <td>
+                                                    <div class="tpl-table-black-operation">
+                                                        <a href="javascript:;">
+                                                            <i class="am-icon-pencil"></i> edit
+                                                        </a>
+                                                        <a href="javascript:;" onclick="deleteContent({{content.id}})" class="tpl-table-black-operation-del">
+                                                            <i class="am-icon-trash"></i> delete
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        {% endif %}
+
+
+
+                                            <!-- more data -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="am-u-lg-12 am-cf">
+
+                                    <div class="am-fr">
+                                        <ul class="am-pagination tpl-pagination" id="pagination">
+                                            <!--<li class="am-disabled"><a href="#">«</a></li>-->
+                                            <!--<li class="am-active"><a href="#">1</a></li>-->
+                                            <!--<li><a href="#">2</a></li>-->
+                                            <!--<li><a href="#">3</a></li>-->
+                                            <!--<li><a href="#">4</a></li>-->
+                                            <!--<li><a href="#">5</a></li>-->
+                                            <!--<li><a href="#">»</a></li>-->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          </div>
+
+
+
+
+{% endblock %}
+{% block popup %}
+<div id="addContent" style="display:none">
+
+            <div class="tpl-login-content">
+                <!--<form class="am-form tpl-form-line-form"  method="POST" action="./content">-->
+                    <!--{% csrf_token %}-->
+                <div class="am-form tpl-form-line-form">
+                    <fieldset>
+                        <legend>Add content</legend>
+                            <div class="am-form-group am-form-file">
+                            <button type="button" class="am-btn am-btn-danger am-btn-sm">
+                            <i class="am-icon-cloud-upload"></i> Please select file</button>
+                            <input id="doc-form-file" type="file" multiple>
+                            </div><span><p id="file-list"></p></span>
+                                <script>
+                                  $(function() {
+                                    $('#doc-form-file').on('change', function() {
+                                      var fileNames = '';
+                                      $.each(this.files, function() {
+                                        fileNames += '<span class="am-badge">' + this.name + '</span> ';
+                                      });
+                                      $('#file-list').html(fileNames);
+                                    });
+                                  });
+                                </script>
+                        <div class="am-form-group">
+                            <label class="tag">Title</label>
+                            <input type="text" class="" id="title" placeholder="Please input file keyword, split by Blank">
+
+                        </div>
+                        <div class="am-form-group">
+                            <label for="selectedType">Type</label>
+                            <select data-am-selected id="selectedType">
+                                <option value="doc">doc</option>
+                                <option value="pdf" selected>pdf</option>
+                                <option value="image">image</option>
+                                <option value="video">vedio</option>
+                                <option value="audio">audio</option>
+                                <option value="other">other</option>
+
+                            </select>
+                        </div>
+                        <div class="am-form-group">
+                            <label class="tag">Tag</label>
+                            <input type="text" class="" id="tag" placeholder="Please input file tag, split by Blank">
+
+                        </div>
+                        <div class="am-form-group" id="tips"></div>
+                        <div class="am-form-group">
+                            <label class="tag">Keyword</label>
+                            <input type="text" class="" id="keyword" placeholder="Please input file keyword, split by Blank">
+
+                        </div>
+                        <div class="am-form-group">
+                            <div class="am-g">
+
+                                <div class="am-u-sm-5 am-u-sm-offset-1">
+                                    <button id="upload" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">upload </button>
+                                </div>
+                                <div class="am-u-sm-5 am-u-end">
+                                    <a id="reset" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">Reset</a>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <!--</form>-->
+            </div>
+        </div>
+{% endblock %}
