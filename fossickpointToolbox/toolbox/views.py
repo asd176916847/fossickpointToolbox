@@ -1,12 +1,14 @@
 import json
 import os
-from .forms import UploadFileForm
+from itertools import chain
+
+from .forms import UploadFileForm, ContentForm
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse
-from .models import User,PersonalInfo,Content
+from .models import User,PersonalInfo,Content,profileRelation,Profile
 from django.http import JsonResponse
-
+from django.db.models import Q
 
 # Create your views here.
 def index(request):
@@ -54,8 +56,7 @@ def user_home(request):
         user = User.objects.get(id = request.session['uuid'])
         if (user.userType == 0):
             response = ""
-            studentList = User.objects.filter(userType = 1)
-            info = {'userName' : user.userName,'contentCount' : Content.objects.count(), 'userCount' : User.objects.count()}
+            info = {'userName' : user.userName,'contentCount' : Content.objects.count(), 'userCount' : User.objects.filter(userType=1).count()}
             #"contentCount":Content.objects.count()}
             #for student in studentList:
             #    response += student.userName + "<br>"
@@ -72,28 +73,61 @@ def user_home(request):
     #     return HttpResponse("You have not login")
 
 def content(request):
-    contentList = Content.objects.all().values()
-    context = {'contentList':contentList,}
-    operation = request.POST.get('operation')
     if request.method == 'POST':
+        operation = request.POST.get('operation')
         if (operation == 'add'):
             form = UploadFileForm(request.POST, request.FILES)
             if form.is_valid():
-                file = Content(name=request.POST.get('title'),type=request.POST.get('type'),tag=request.POST.get('tag'),keyword=request.POST.get('keyword'),address=request.FILES['file'])
-                file.save()
+                profile = request.POST.get('profile')
+                title = request.POST.get('title')
+                content = Content(name=title,type=request.POST.get('type'),tag=request.POST.get('tag'), keyword=request.POST.get('keyword'),address=request.FILES['file'],focus=request.POST.get('focus'),profileText=profile)
+                profiles = profile.split(';')
+                content.save()
+                for aProfile in profiles:
+                    content.profile.add(Profile.objects.get(profileName=aProfile))
                 return JsonResponse({"status":1})
             else:
                 return JsonResponse({"status":0})
-        if (operation == 'delete'):
-            content = Content.objects.get(id=request.POST.get('id'))
-            address = content.address
-            os.remove(address.name)
-            content.delete()
-            return JsonResponse({"status":1})
+        else:
+            if (operation == 'delete'):
+                content = Content.objects.get(id=request.POST.get('id'))
+                address = content.address
+                os.remove(address.name)
+                content.delete()
+                return JsonResponse({"status":1})
+            else:
+                focus = request.POST.get('focusSearch')
+                tag = request.POST.get('tagSearch')
+                keyword = request.POST.get('keywordSearch')
+                profilesText = request.POST.getlist('profileSearch')
+                if focus == "All Focuses":
+                    q = Content.objects.all()
+                else:
+                    q = Content.objects.filter(focus=focus)
 
+                if tag != "All tags":
+                    q = q.filter(tag=tag)
+                if profilesText[0] != "All profiles":
+                    q2 = Content.objects.filter(tag="null")
+                    for profileText in profilesText:
+                        aProfile = Profile.objects.get(profileName=profileText)
+                        q3 = q.filter(profile=aProfile)
+                        q2 = chain(q3,q2)
+                    q = set(q2)
+                contentList = q
+                context = {'contentList':contentList}
+                return render(request, "toolbox/content.html", context)
+
+    contentList = Content.objects.all().values()
+    context = {'contentList':contentList}
     return render(request,"toolbox/content.html",context)
 
 def handle_uploaded_file(f):
     with open(os.path.join('static', f.name), 'wb') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
+
+def user(request):
+    studentList = User.objects.filter(userType=1)
+
+    return render(request,"toolbox/user.html",{'studentList':studentList})

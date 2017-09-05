@@ -43,6 +43,32 @@ function clearUploadForm() {
     $("#title").val("");
     $("#tag").val("");
     $("keyword").val("");
+
+}
+
+function search() {
+    var focus = $("#focusSearch").val();
+    var profile = $("#profileSearch").val();
+    alert(profile);
+    var tag = $("#tagSearch").val();
+    var keyword = $("#keywordSearch").val();
+    var form = new FormData();
+    form.append('operation', 'search');
+    form.append('focus',focus);
+    form.append('profile',profile);
+    form.append('tag',tag);
+    form.append('keyword','keyword');
+    $.ajax({
+        type:'POST',
+        url:'./content',
+        data:form,
+        processData:false,  // 告诉jquery不转换数据
+        contentType:false,  // 告诉jquery不设置内容格式
+
+        success:function (arg) {
+
+        }
+    })
 }
 $(document).ready(function(){
     //打开弹出窗口
@@ -61,14 +87,22 @@ $(document).ready(function(){
     $("#upload").click(function(){
         var fileobj = $("#doc-form-file")[0].files[0];
         var form = new FormData();
-        var csrf_token = getCookie('csrftoken');
-//        form.append('operation','add');
-        form.append('operation','add'),
+//        var csrf_token = getCookie('csrftoken');
+        form.append('operation','add');
         form.append('file',fileobj);
         form.append('title', $("#title").val());
         form.append('type',$("#selectedType").val());
-       form.append('tag',$("#tag").val());
+        form.append('tag',$("#tag").val());
         form.append('keyword',$("#keyword").val());
+        form.append('focus',$("#focus").val());
+        var profile="";
+        $('input[type="checkbox"][name="chk"]:checked').each(
+                        function() {
+                            profile=profile + $(this).val() + ";";
+                        }
+        );
+        profile = profile.substring(0,profile.length - 1)
+        form.append('profile',profile);
         $.ajax({
             type:'POST',
             url:'./content',

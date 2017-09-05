@@ -18,17 +18,26 @@ class PersonalInfo(models.Model):
     email = models.EmailField()
     def __str__(self):
         return self.user.userName
+class Profile(models.Model):
+    profileName = models.TextField(max_length=100)
+    def __str__(self):              # __unicode__ on Python 2
+        return self.profileName
 
+    class Meta:
+        ordering = ('profileName',)
 class Content(models.Model):
-    name = models.CharField(max_length=30)
-
-    type_choice = (('doc','doc'),('pdf','pdf'),('image', 'image'),('vedio', 'vedio'),('audio', 'audio'),('other','other'))
+    name = models.CharField(max_length=100)
+    type_choice = (('doc','doc'),('pdf','pdf'),('image', 'image'),('video', 'video'),('audio', 'audio'),('other','other'))
     type = models.CharField(max_length=30,choices=type_choice)
-    tag = models.CharField(max_length=100)
+    focus_choice = (('Being','Emotional Intelligence'),('Belonging','Social Intelligence'),('Becoming','Self Actualization'))
+    focus = models.CharField(max_length=30,choices=focus_choice,default='Emotional Intelligence')
+    tag_choice = (('Images','Images'),('Formulas','Formulas'),('Activities','Activities'),('Skills','Skills'),('Social frameworks','Social frameworks'),('Concepts','Concepts'),('Myths & notions','Myths & notions'),('Principles','Principles'))
+    tag = models.CharField(max_length=30,choices=tag_choice)
+    profile = models.ManyToManyField(Profile)
+    profileText = models.TextField(max_length=100,default='')
     keyword = models.CharField(max_length=100)
     address = models.FileField(upload_to='contents/')
-    preContent = models.ForeignKey('self',related_name='precontent',null=True)
-    nextContent = models.ForeignKey('self',related_name='nextcontent',null=True)
+
     def __str__(selfs):
         return selfs.name
 
@@ -43,3 +52,8 @@ class UserContent(models.Model):
     contents = models.TextField(max_length=None)
     def __str__(selfs):
         return selfs.user.name
+
+class profileRelation(models.Model):
+    contentName = models.CharField(max_length=100)
+    profileName = models.CharField(max_length=30)
+
