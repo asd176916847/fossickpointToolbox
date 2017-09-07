@@ -10,7 +10,7 @@ from .models import User,PersonalInfo,Content,profileRelation,Profile
 from django.http import JsonResponse
 from django.db.models import Q
 
-# Create your views here.
+
 def index(request):
     return render(request,"toolbox/index.html")
 
