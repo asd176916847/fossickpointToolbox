@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>FossickPoint Toolbox</title>
-    <meta name="description" content="这是一个 index 页面">
+    <meta name="description" content="This is an index page">
     <meta name="keywords" content="index">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
@@ -36,7 +36,6 @@
 
 
 
-                <!--<form class="am-form tpl-form-line-form">-->
                 <div class="am-form tpl-form-line-form">
                     <fieldset>
                         <legend>Sign up</legend>
@@ -71,7 +70,6 @@
                         </div>
                     </fieldset>
                 </div>
-                <!--</form>-->
             </div>
         </div>
     </div>
@@ -86,8 +84,7 @@
                         alert("Sign up successfully")
                         location.href = "../";
                     }
-                    else {
-                        //alert(result["username or password wrong"]);                            
+                    else {                           
                         $("#tips").html("The username has existed");
                         $("#tips").css("color", "red");
                         reset()

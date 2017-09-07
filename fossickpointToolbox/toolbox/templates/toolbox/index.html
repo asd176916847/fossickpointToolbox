@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>FossickPoint Toolbox</title>
-    <meta name="description" content="这是一个 index 页面">
+    <meta name="description" content="This is an index page">
     <meta name="keywords" content="index">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
@@ -71,8 +71,7 @@
                         if (result["status"] == 0) {
                             location.href = "./home";
                         }
-                        else {
-                            //alert(result["username or password wrong"]);                            
+                        else {                          
                             $("#tips").html("username or password wrong");
                             $("#tips").css("color", "red");
                             $("#userName").val("");
