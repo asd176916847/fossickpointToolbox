@@ -60,7 +60,7 @@ function search() {
     form.append('keyword','keyword');
     $.ajax({
         type:'POST',
-        url:'./content',
+        url:'../content',
         data:form,
         processData:false,  // 告诉jquery不转换数据
         contentType:false,  // 告诉jquery不设置内容格式
@@ -105,7 +105,7 @@ $(document).ready(function(){
         form.append('profile',profile);
         $.ajax({
             type:'POST',
-            url:'./content',
+            url:'../content/',
             data:form,
             processData:false,  // 告诉jquery不转换数据
             contentType:false,  // 告诉jquery不设置内容格式

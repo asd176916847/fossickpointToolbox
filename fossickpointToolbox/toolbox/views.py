@@ -6,7 +6,7 @@ from .forms import UploadFileForm, ContentForm
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse
-from .models import User,PersonalInfo,Content,profileRelation,Profile
+from .models import User,PersonalInfo,Content,Profile,Program
 from django.http import JsonResponse
 from django.db.models import Q
 
@@ -122,12 +122,31 @@ def content(request):
     context = {'contentList':contentList}
     return render(request,"toolbox/content.html",context)
 
+
 def handle_uploaded_file(f):
     with open(os.path.join('static', f.name), 'wb') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
 
+def programs(request):
+    if request.method == 'POST':
+        operation = request.POST.get('operation')
+        if operation == 'create':
+            programName = request.POST.get('programName')
+            programDescription = request.POST.get('programDescription')
+            aProgram = Program(name=programName, describe=programDescription)
+            aProgram.save()
+            return JsonResponse({"status" : 1})
+
+    programList = Program.objects.all().values()
+    context = {'programList':programList}
+    return render(request,"toolbox/program.html", context)
+
+def program(request, programID):
+    return HttpResponse("The param is : " + programID)
+
 def user(request):
     studentList = User.objects.filter(userType=1)
 
     return render(request,"toolbox/user.html",{'studentList':studentList})
+

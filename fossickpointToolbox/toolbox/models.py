@@ -54,7 +54,13 @@ class UserContent(models.Model):
     def __str__(selfs):
         return selfs.user.name
 
-class profileRelation(models.Model):
-    contentName = models.CharField(max_length=100)
-    profileName = models.CharField(max_length=30)
+class Program(models.Model):
+    name = models.CharField(max_length=100)
+    describe = models.CharField(max_length=200)
+    contentsNumber = models.IntegerField(default=0)
+
+class ProgramDetail(models.Model):
+    content = models.ForeignKey(Content)
+    program = models.ForeignKey(Program)
+    order = models.IntegerField()
 

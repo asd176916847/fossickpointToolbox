@@ -5,11 +5,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toolbox/admin.py" afterPath="$PROJECT_DIR$/toolbox/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toolbox/forms.py" afterPath="$PROJECT_DIR$/toolbox/forms.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toolbox/models.py" afterPath="$PROJECT_DIR$/toolbox/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toolbox/static/toolbox/js/content.js" afterPath="$PROJECT_DIR$/toolbox/static/toolbox/js/content.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toolbox/templates/toolbox/content.html" afterPath="$PROJECT_DIR$/toolbox/templates/toolbox/content.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toolbox/templates/toolbox/homepage.html" afterPath="$PROJECT_DIR$/toolbox/templates/toolbox/homepage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toolbox/templates/toolbox/_base.html" afterPath="$PROJECT_DIR$/toolbox/templates/toolbox/_base.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toolbox/urls.py" afterPath="$PROJECT_DIR$/toolbox/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/toolbox/views.py" afterPath="$PROJECT_DIR$/toolbox/views.py" />
     </list>
@@ -29,8 +27,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/toolbox/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="120" column="48" lean-forward="true" selection-start-line="120" selection-start-column="48" selection-end-line="120" selection-end-column="48" />
+            <state relative-caret-position="170">
+              <caret line="130" column="22" lean-forward="true" selection-start-line="130" selection-start-column="22" selection-end-line="130" selection-end-column="22" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -38,21 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py">
+      <file leaf-file-name="_base.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/toolbox/templates/toolbox/_base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="186" column="0" lean-forward="false" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="exception.py" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/lib/python2.7/dist-packages/django/core/handlers/exception.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+            <state relative-caret-position="1200">
+              <caret line="60" column="83" lean-forward="false" selection-start-line="60" selection-start-column="83" selection-end-line="60" selection-end-column="83" />
               <folding />
             </state>
           </provider>
@@ -61,9 +49,25 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/toolbox/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="36" column="60" lean-forward="false" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="60" />
+            <state relative-caret-position="222">
+              <caret line="56" column="13" lean-forward="false" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="program.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/toolbox/templates/toolbox/program.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="332">
+              <caret line="68" column="87" lean-forward="false" selection-start-line="68" selection-start-column="87" selection-end-line="68" selection-end-column="87" />
+              <folding>
+                <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#0;n#span#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -71,8 +75,8 @@
       <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/toolbox/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="9" column="27" lean-forward="false" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+            <state relative-caret-position="60">
+              <caret line="3" column="70" lean-forward="false" selection-start-line="3" selection-start-column="70" selection-end-line="3" selection-end-column="70" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -80,11 +84,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/toolbox/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="3" column="6" lean-forward="true" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+            <state relative-caret-position="160">
+              <caret line="8" column="46" lean-forward="true" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -92,11 +96,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/toolbox/templates/toolbox/home.html">
+      <file leaf-file-name="program.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/toolbox/static/toolbox/js/program.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="403">
+              <caret line="47" column="28" lean-forward="false" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -105,8 +109,8 @@
       <file leaf-file-name="content.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/toolbox/static/toolbox/js/content.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="50" column="35" lean-forward="false" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="35" />
+            <state relative-caret-position="351">
+              <caret line="107" column="28" lean-forward="false" selection-start-line="107" selection-start-column="28" selection-end-line="107" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -115,18 +119,18 @@
       <file leaf-file-name="homepage.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/toolbox/templates/toolbox/homepage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="620">
-              <caret line="31" column="22" lean-forward="false" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+            <state relative-caret-position="60">
+              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="content.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="content.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/toolbox/templates/toolbox/content.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="44" column="85" lean-forward="true" selection-start-line="44" selection-start-column="85" selection-end-line="44" selection-end-column="85" />
+            <state relative-caret-position="5040">
+              <caret line="333" column="0" lean-forward="false" selection-start-line="333" selection-start-column="0" selection-end-line="343" selection-end-column="22" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
               </folding>
@@ -151,6 +155,8 @@
       <find>.theme-white .tpl-login-btn</find>
       <find>add</find>
       <find>profileSearch</find>
+      <find>rela</find>
+      <find>am-icon-c</find>
     </findStrings>
     <replaceStrings>
       <replace>{% static toolbox</replace>
@@ -178,16 +184,18 @@
         <option value="$PROJECT_DIR$/toolbox/templates/toolbox/base.html" />
         <option value="$PROJECT_DIR$/toolbox/templates/toolbox/_header.html" />
         <option value="$PROJECT_DIR$/toolbox/static/toolbox/css/content.css" />
-        <option value="$PROJECT_DIR$/toolbox/templates/toolbox/_base.html" />
-        <option value="$PROJECT_DIR$/toolbox/urls.py" />
         <option value="$PROJECT_DIR$/toolbox/templates/toolbox/homepage.html" />
         <option value="$PROJECT_DIR$/toolbox/templates/toolbox/user.html" />
         <option value="$PROJECT_DIR$/toolbox/forms.py" />
-        <option value="$PROJECT_DIR$/toolbox/admin.py" />
-        <option value="$PROJECT_DIR$/toolbox/models.py" />
-        <option value="$PROJECT_DIR$/toolbox/static/toolbox/js/content.js" />
         <option value="$PROJECT_DIR$/toolbox/templates/toolbox/content.html" />
+        <option value="$PROJECT_DIR$/toolbox/templates/toolbox/_base.html" />
+        <option value="$PROJECT_DIR$/toolbox/admin.py" />
+        <option value="$PROJECT_DIR$/toolbox/static/toolbox/js/content.js" />
+        <option value="$PROJECT_DIR$/toolbox/static/toolbox/js/program.js" />
+        <option value="$PROJECT_DIR$/toolbox/templates/toolbox/program.html" />
+        <option value="$PROJECT_DIR$/toolbox/models.py" />
         <option value="$PROJECT_DIR$/toolbox/views.py" />
+        <option value="$PROJECT_DIR$/toolbox/urls.py" />
       </list>
     </option>
   </component>
@@ -215,7 +223,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -286,6 +293,32 @@
               <option name="myItemId" value="toolbox" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fossickpointToolbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fossickpointToolbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="toolbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="toolbox" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -303,12 +336,157 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../tpmonitor" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/db.sqlite3</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/fossickpointToolbox/__pycache__/__init__.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/fossickpointToolbox/__pycache__/settings.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/fossickpointToolbox/__pycache__/urls.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/fossickpointToolbox/__pycache__/wsgi.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/__pycache__/__init__.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/__pycache__/admin.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/__pycache__/apps.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/__pycache__/forms.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/__pycache__/models.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/__pycache__/urls.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/__pycache__/views.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/migrations/__pycache__/0001_initial.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/migrations/__pycache__/0002_auto_20170807_0613.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/migrations/__pycache__/0003_personalinfo_email.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/migrations/__pycache__/0004_content_group_usercontent.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/migrations/__pycache__/0005_auto_20170819_0851.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/migrations/__pycache__/0006_auto_20170819_0900.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/migrations/__pycache__/0007_auto_20170825_0045.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/migrations/__pycache__/0008_auto_20170825_0047.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/migrations/__pycache__/0009_auto_20170829_2345.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/migrations/__pycache__/0010_auto_20170905_0121.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/migrations/__pycache__/0011_auto_20170905_0143.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/migrations/__pycache__/0012_auto_20170905_0223.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/migrations/__pycache__/0013_auto_20170905_0225.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/migrations/__pycache__/0014_content_profiletext.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/migrations/__pycache__/__init__.cpython-35.pyc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/models.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/templates/toolbox/_base.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/templates/toolbox/_header.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/templates/toolbox/index.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/templates/toolbox/register.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/views.py</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/migrations/0015_personalinfo_note.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/toolbox/migrations/__pycache__/0015_personalinfo_note.cpython-35.pyc</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -448,7 +626,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32012194" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -485,28 +663,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="19" />
+      <option name="time" value="21" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/toolbox/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="30" column="55" lean-forward="true" selection-start-line="30" selection-start-column="55" selection-end-line="30" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/toolbox/templates/toolbox/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1460">
-          <caret line="73" column="30" lean-forward="false" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/toolbox/templates/toolbox/register.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1280">
@@ -655,13 +816,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/toolbox/templates/toolbox/_base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1860">
-          <caret line="93" column="7" lean-forward="false" selection-start-line="93" selection-start-column="7" selection-end-line="93" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/lib/python2.7/SocketServer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="302">
@@ -715,7 +869,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -723,7 +876,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="409">
           <caret line="23" column="16" lean-forward="false" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -731,7 +883,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="19" column="11" lean-forward="false" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -739,9 +890,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="11" column="23" lean-forward="true" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -749,25 +897,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="38" column="24" lean-forward="false" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/toolbox/templates/toolbox/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
-          <caret line="62" column="28" lean-forward="true" selection-start-line="62" selection-start-column="28" selection-end-line="62" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/toolbox/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" column="6" lean-forward="true" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -775,17 +904,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="531">
           <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/core/handlers/exception.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/toolbox/admin.py">
+    <entry file="file://$PROJECT_DIR$/toolbox/templates/toolbox/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" column="27" lean-forward="false" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1240">
+          <caret line="62" column="28" lean-forward="true" selection-start-line="62" selection-start-column="28" selection-end-line="62" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -797,62 +931,104 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/toolbox/models.py">
+    <entry file="file://$PROJECT_DIR$/toolbox/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="36" column="60" lean-forward="false" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="60" />
-          <folding />
+        <state relative-caret-position="60">
+          <caret line="3" column="70" lean-forward="false" selection-start-line="3" selection-start-column="70" selection-end-line="3" selection-end-column="70" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/toolbox/templates/toolbox/homepage.html">
+    <entry file="file://$PROJECT_DIR$/toolbox/templates/toolbox/_base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="31" column="22" lean-forward="false" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+        <state relative-caret-position="1200">
+          <caret line="60" column="83" lean-forward="false" selection-start-line="60" selection-start-column="83" selection-end-line="60" selection-end-column="83" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/toolbox/static/toolbox/js/content.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="50" column="35" lean-forward="false" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="35" />
+        <state relative-caret-position="351">
+          <caret line="107" column="28" lean-forward="false" selection-start-line="107" selection-start-column="28" selection-end-line="107" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/toolbox/static/toolbox/js/program.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="47" column="28" lean-forward="false" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file:///usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="186" column="0" lean-forward="false" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
+        <state relative-caret-position="280">
+          <caret line="189" column="0" lean-forward="false" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/core/handlers/exception.py">
+    <entry file="file://$PROJECT_DIR$/toolbox/templates/toolbox/homepage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+        <state relative-caret-position="60">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/toolbox/templates/toolbox/content.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5040">
+          <caret line="333" column="0" lean-forward="false" selection-start-line="333" selection-start-column="0" selection-end-line="343" selection-end-column="22" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/toolbox/templates/toolbox/program.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="68" column="87" lean-forward="false" selection-start-line="68" selection-start-column="87" selection-end-line="68" selection-end-column="87" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#span#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/toolbox/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="56" column="13" lean-forward="false" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/toolbox/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="120" column="48" lean-forward="true" selection-start-line="120" selection-start-column="48" selection-end-line="120" selection-end-column="48" />
+        <state relative-caret-position="170">
+          <caret line="130" column="22" lean-forward="true" selection-start-line="130" selection-start-column="22" selection-end-line="130" selection-end-column="22" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/toolbox/templates/toolbox/content.html">
+    <entry file="file://$PROJECT_DIR$/toolbox/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="44" column="85" lean-forward="true" selection-start-line="44" selection-start-column="85" selection-end-line="44" selection-end-column="85" />
+        <state relative-caret-position="160">
+          <caret line="8" column="46" lean-forward="true" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
           <folding>
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
