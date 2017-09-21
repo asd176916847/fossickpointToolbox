@@ -1,123 +1,111 @@
-{% extends 'toolbox/_base.html' %} {% load static %} {% block csslink %}
-<!--<link rel="stylesheet" href="{% static 'toolbox/css/content.css' %}" />-->
+{% extends 'toolbox/_base.html' %} {% load static %} {% block csslink %} {% endblock %} {% block title %} Program {% endblock %} {% block main %}
+<!-- <script src="{% static 'toolbox/js/jquery.sortable.js' %}"></script> -->
+<script src="//cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 <script src="{% static 'toolbox/js/program.js' %}"></script>
-<script src="{% static 'toolbox/js/layer.js' %}"></script>
 
-{% endblock %}
-{% block title %} Program {% endblock %}
-{% block main %}
 <div class="row-content am-cf">
-    <div class="row">
-        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+    <div class="row am-cf">
+        <!-- program box -->
+        <div class="am-u-sm-12 am-u-md-8 am-u-lg-4">
+            <form action="">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">Program <span id="programId">{{programID}}</span></div>
+                        <span class="am-btn-group am-btn-group-xs am-fr" style="padding-left:40px">
+                                <button type="button" class="am-btn am-btn-danger" style="margin-right:10px" onclick="updateProgram()"><span class="am-icon-plus"></span>Update</button>
+
+                    </div>
+                    <div class="widget-body am-fr">
+                        <ol id="programList" class="am-list-static am-list-striped" style="height: 500px">
+                            <!-- <li>1</li> -->
+                        </ol>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- content box -->
+        <div class="am-u-sm-12 am-u-md-8 am-u-lg-8">
             <div class="widget am-cf">
                 <div class="widget-head am-cf">
-                    <div class="widget-title  am-cf">Program list</div>
+                    <div class="widget-title  am-cf">Content list</div>
                 </div>
-                <div class="widget-body">
-                    <div>
-                                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-8">
-                        <div class="am-form-group">
-                            <div class="am-btn-toolbar">
-                                <div class="am-btn-group am-btn-group-xs">
-                                    <button type="button" class="am-btn am-btn-default am-btn-danger" id="add">
-                                                    <span class="am-icon-plus"></span> Add</button>
-                                </div>
+                 <div class="widget-body  am-fr">
+                        <form id="searchForm">
+                        <div class="am-u-sm-12 am-u-md-6 am-u-lg-3 am-u-lg-offset-1">
+                            <div class="am-form-group tpl-table-list-select">
+                                <select data-am-selected="{btnSize: 'sm'}" name="focusSearch">
+                                              <option value="All Focuses">All Focuses</option>
+                                              <option value="Emotional Intelligence">Emotional Intelligence</option>
+                                              <option value="Social Intelligence">Social Intelligence</option>
+                                              <option value="Self Actualization">Self Actualization</option>
+                                            </select>
                             </div>
                         </div>
+                        <div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
+                            <div class="am-form-group tpl-table-list-select">
+                                <select multiple data-am-selected="{btnSize: 'sm'}" name="profileSearch">
+                                                <optgroup label="All">
+                                                    <option value="All profiles" selected>All profiles</option>
+                                                </optgroup>
+                                                <optgroup label="B.Dominance">
+                                                    <option value="FL">FL</option>
+                                                    <option value="FR">FR</option>
+                                                    <option value="BL">BL</option>
+                                                    <option value="BR">BR</option>
+                                                </optgroup>
+                                                <optgroup label="Temperament">
+                                                    <option value="Think">Think</option>
+                                                    <option value="Feel">Feel</option>
+                                                    <option value="Act">Act</option>
+                                                </optgroup>
+                                                <optgroup label="Arosual">
+                                                    <option value="Introvert">Introvert</option>
+                                                    <option value="Extrovert">Extrovert</option>
+                                                    <option value="Introvert/extrovert">Introvert/extrovert</option>
+                                                </optgroup>
+                                                <optgroup label="Stimuli">
+                                                    <option value="HSP">HSP</option>
+                                                    <option value="HSS">HSS</option>
+                                                </optgroup>
+    
+                                            </select>
+                            </div>
+                        </div>
+                        <div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
+                            <div class="am-form-group tpl-table-list-select" >
+                                <select data-am-selected="{btnSize: 'sm'}" name="tagSearch">
+                                              <option value="All tags"   selected>All tags</option>
+                                    <option value="images">Images</option>
+                                    <option value="formulas">Formulas</option>
+                                    <option value="activities">Activities</option>
+                                    <option value="skills">Skills</option>
+                                    <option value="socialFrameworks">Social frameworks</option>
+                                    <option value="concepts">Concepts</option>
+                                    <option value="myths">Myths & notions</option>
+                                    <option value=principles>Principles</option>
+                                            </select>
+                            </div>
+                        </div>
+                        <div class="am-u-sm-12 am-u-md-12 am-u-lg-1">
+                            <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
+                                <span class="am-input-group-btn">
+                                    <button class="am-btn  am-btn-default am-btn-danger tpl-table-list-field am-icon-search" type="submit" ></button></span>
+    
+                            </div>
+
+                        </div>
+                        </form>
+                </div>                         
+                
+                        <div style="margin-top:40px;">
+                        <ol id="contentList" class="am-list-static am-list-striped" style="height: 500px;" >
+                            {% if contentList %} {% for content in contentList %}
+                            <li id="{{content.id}}">{{content.name}}</li>
+                            {% endfor %} {% endif %}
+                        </ol>
                     </div>
-                <form>
-                                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-4">
-                        <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
-                            <input type="text" class="am-form-field" name="keywordSearch">
-                            <span class="am-input-group-btn">
-                                <button class="am-btn  am-btn-default am-btn-danger tpl-table-list-field am-icon-search" type="submit" ></button></span>
 
-                        </div>
-                    </div>
-                    </form>
-                        </div>
-                    {% if programList %}
-                        {% for program in programList %}
-                     <!--<div class="am-u-sm-12 am-u-md-6 am-u-lg-5" style="background-color:#e9edf3;margin-top:20px">-->
-
-                        <!--<div>-->
-                            <!--<div class="widget-head am-cf">-->
-                                <!--<div class="widget-title am-fl">{{program.name}}</div>-->
-                                <!--<span class="am-btn-group am-btn-group-xs am-fr"  style="padding-left:40px">-->
-                                    <!--<button type="button" class="am-btn am-btn-danger" style="margin-right:10px"><span class="am-icon-plus"></span>View</button>-->
-                                    <!--<button type="button" class="am-btn am-btn-danger"><span class="am-icon-plus"></span>Delete</button>-->
-
-                                <!--</span>-->
-                            <!--</div>-->
-                            <!--<div class="widget-body widget-body-md am-fr">-->
-
-                                <!--<div class="am-progress-title">{{program.description}}</div>-->
-                                <!--<div>-->
-                                    <!--Contents number: {{program.contentsNumber}}-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                                    <div class="am-u-sm-18 am-u-md-9 am-u-lg-6">
-
-                                        <div class="widget widget-primary am-cf">
-
-                                            <div class="widget-statistic-header" style="font-size:18px">
-                            {{program.name}}
-                                                <span class="am-btn-group am-btn-group-xs am-fr"  style="padding-left:40px">
-                                    <button type="button" class="am-btn am-btn-primary" style="margin-right:10px"><span class="am-icon-plus"></span>View</button>
-                                    <button type="button" class="am-btn am-btn-primary""><span class="am-icon-plus"></span>Delete</button>
-
-                                </span>
-                        </div>
-                        <div class="widget-statistic-body">
-                            <div style="font-size:25px" align = "center">
-                                Description: {{program.describe}}
-                            </div>
-                            <div style="font-size:25px" align = "center">
-                                Contents number: {{program.contentsNumber}}
-                            </div>
-
-                            <span class="widget-statistic-icon am-icon-credit-card-alt"></span>
-                        </div>
-                                        </div>
-                                    </div>
-                        {% endfor %}
-                    {% endif %}
-
-</div>
-
+            </div>
         </div>
     </div>
-</div>
-{% endblock %}
-{% block popup %}
-    <div id="addProgram" style="display:none">
-            <div class="tpl-login-content">
-        <!--<form class="am-form tpl-form-line-form" id="contentForm">-->
-        <!--{% csrf_token %}-->
-        <div class="am-form tpl-form-line-form">
-            <fieldset>
-                <legend>Add content</legend>
-            </fieldset>
-            <div class="am-form-group">
-                    <label class="tag">Program name</label>
-                    <input type="text" class="" id="programName" name="name" placeholder="Please input program name">
-            </div>
-            <div class="am-form-group">
-                    <label class="tag">Program description</label>
-                    <input type="text" class="" id="programDescription" name="description" placeholder="Please input program description">
-            </div>
-                            <div class="am-form-group">
-                    <div class="am-g">
-
-                        <div class="am-u-sm-5 am-u-sm-offset-3">
-                            <button id="create" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">Create program </button>
-                        </div>
-
-                    </div>
-                </div>
-        </div>
-            </div>
-    </div>
-{% endblock %}
+    {% endblock %}

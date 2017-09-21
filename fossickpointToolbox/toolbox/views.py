@@ -140,13 +140,20 @@ def programs(request):
 
     programList = Program.objects.all().values()
     context = {'programList':programList}
-    return render(request,"toolbox/program.html", context)
+    return render(request,"toolbox/programs.html", context)
 
 def program(request, programID):
-    return HttpResponse("The param is : " + programID)
+    if (request.method) == 'POST':
+        
+    contentList = Content.objects.all().values()
+    context = {'programID': programID,'contentList':contentList}
+
+    return render(request, "toolbox/program.html", context)
 
 def user(request):
     studentList = User.objects.filter(userType=1)
 
     return render(request,"toolbox/user.html",{'studentList':studentList})
+
+
 

@@ -26,44 +26,47 @@ $.ajaxSetup({
         }
     }
 });
-
 $(document).ready(function(){
-    $("#add").click(function(){
-        //调用函数居中窗口
-          layer.open({
-            type: 1,
-            area: ['500px', '600px'],
-            title: 'Create program',
-            shadeClose: false, //点击遮罩关闭
-            content: $('#addProgram')
-          });
-    });
-    $("#create").click(function(){
-        var form = new FormData();
-        form.append("operation","create");
-        form.append("programName",$("#programName").val());
-        form.append("programDescription",$("#programDescription").val());
-        $.ajax({
-            type:'POST',
-            url:'../program/',
-            data:form,
-            processData:false,  // 告诉jquery不转换数据
-            contentType:false,  // 告诉jquery不设置内容格式
+    var contentList = document.getElementById('contentList');
+    var sortable = Sortable.create(contentList, {group: "content"});
 
-            success:function (arg) {
-                if (arg["status"] == "1")
-                {
-                    alert("create program successfully");
-                    window.location.href='../program';
+    var programList = document.getElementById('programList');
+    var sortable2 = Sortable.create(programList, {group: "content"});
+    // Sortable.create(qux,{
+    //     group:{
+    //         name: 'qux',
+    //         put: ['content','program']
+    //     },
+    //     animation:100
+    // })
+})
 
-                }
-                else
-                {
-                    alert("create program failed");
+function updateProgram()
+{
+    var programList = $("#programList li");
+    var form = new FormData();
+    programList.each(function(index){
+        form.append(index, $(this).attr("id"));
+    })
+    $.ajax({
+        type:'POST',
+        url:  location.href,
+        data:form,
+        processData:false,  // 告诉jquery不转换数据
+        contentType:false,  // 告诉jquery不设置内容格式
 
-                }
+        success:function (arg) {
+            if (arg["status"] == "1")
+            {
+                alert("update program successfully");
+                location.reload();
+
             }
-        });
-    });
+            else
+            {
+                alert("create program failed");
 
-});
+            }
+        }
+    });
+}
