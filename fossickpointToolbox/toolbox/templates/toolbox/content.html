@@ -116,7 +116,7 @@
                                     <td>{{content.keyword}}</td>
                                     <td>
                                         <div class="tpl-table-black-operation">
-                                            <a href="javascript:;">
+                                            <a href="javascript:;" onclick="editContent({{content.id}})" class="tpl-table-black-operation-edit">
                                                             <i class="am-icon-pencil"></i> edit
                                                         </a>
                                             <a href="javascript:;" onclick="deleteContent({{content.id}})" class="tpl-table-black-operation-del">
@@ -354,6 +354,215 @@
                         </div>
                         <div class="am-u-sm-5 am-u-end">
                             <a id="reset" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">Reset</a>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <!--</form>-->
+    </div>
+</div>
+
+<div id="editContent" style="display:none">
+
+    <div class="tpl-login-content">
+        <!--<form class="am-form tpl-form-line-form" id="contentForm">-->
+        <!--{% csrf_token %}-->
+        <div class="am-form tpl-form-line-form">
+            <fieldset>
+                <legend>Add content</legend>
+                <div class="am-form-group am-form-file">
+                    <button type="button" class="am-btn am-btn-danger am-btn-sm">
+                            <i class="am-icon-cloud-upload"></i> Please select file</button>
+                    <input id="doc-form-file1" type="file" name="uploadFile" multiple>
+                </div><span><p id="file-list1"></p></span>
+
+                                <div class="am-form-group am-form-file">
+                    <button type="button" class="am-btn am-btn-danger am-btn-sm">
+                        <i class="am-icon-cloud-upload"></i> Please select thumbnail</button>
+                    <input id="doc-form-thumbnail1" type="file" name="uploadFile" multiple>
+                </div><span><p id="thumbnail-list1"></p></span>
+                                <script>
+                    $(function () {
+                        $('#doc-form-file1').on('change', function () {
+                            var fileNames = '';
+                            $.each(this.files, function () {
+                                fileNames += '<span class="am-badge">' + this.name + '</span> ';
+                            });
+                            $('#file-list1').html(fileNames);
+                        });
+                    });
+                    $(function () {
+                        $('#doc-form-thumbnail').on('change', function () {
+                            var fileNames = '';
+                            $.each(this.files, function () {
+                                fileNames += '<span class="am-badge">' + this.name + '</span> ';
+                            });
+                            $('#thumbnail-list').html(fileNames);
+                        });
+                    });
+
+
+
+                </script>
+                <div class="am-form-group">
+                    <label class="tag">Name</label>
+                    <input type="text" class="" id="title1" name="title" placeholder="Please input file keyword, split by Blank">
+
+                </div>
+                <div class="am-form-group">
+                    <div class="row">
+                        <div class="am-u-lg-4">
+                            <label for="selectedType">Type</label>
+
+                        </div>
+                        <div class="am-u-lg-8">
+                            <select data-am-selected name="type" id="selectedType1">
+                                <option value="doc">doc</option>
+                                <option value="pdf" selected>pdf</option>
+                                <option value="image">image</option>
+                                <option value="video">vedio</option>
+                                <option value="audio">audio</option>
+                                <option value="other">other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="am-form-group">
+                    <div class="row">
+                        <div class="am-u-lg-4">
+                            <label for="focus">Focus</label>
+
+                        </div>
+                        <div class="am-u-lg-8">
+                            <select data-am-selected id="focus1" name="focus">
+                                <option value="Emotional Intelligence">Emotional Intelligence</option>
+                                <option value="Social Intelligence" selected>Social Intelligence</option>
+                                <option value="Self Actualization">Self Actualization</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="am-form-group">
+                    <div class="row">
+                        <div class="am-u-lg-4">
+                            <label class="tag" for="tag">Tag</label>
+
+                        </div>
+                        <div class="am-u-lg-8">
+                            <select data-am-selected id="tag1" name="tag">
+                                <option value="images"  selected>Images</option>
+                                <option value="formulas">Formulas</option>
+                                <option value="activities">Activities</option>
+                                <option value="skills">Skills</option>
+                                <option value="socialFrameworks">Social frameworks</option>
+                                <option value="concepts">Concepts</option>
+                                <option value="myths">Myths & notions</option>
+                                <option value=principles>Principles</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="am-form-group">
+
+                    <label class="tag">Profile</label>
+                    <div class="row">
+                        <div class="am-u-lg-3">
+
+                            B.Dominance
+                        </div>
+                        <div class="am-u-lg-9">
+
+                            <label class="am-checkbox-inline">
+                                        <input type="checkbox" value="FL" data-am-ucheck id="FL1" name="chk">FL
+                                    </label>
+
+                            <label class="am-checkbox-inline">
+                                        <input type="checkbox" value="FR" data-am-ucheck id="FR1" name="chk">FR
+                                    </label>
+
+                            <label class="am-checkbox-inline">
+                                        <input type="checkbox" value="BL" data-am-ucheck id="BL1" name="chk">BL
+                                    </label>
+
+
+                            <label class="am-checkbox-inline">
+                                        <input type="checkbox" value="BR" data-am-ucheck id="BR1" name="chk">BR
+                                    </label>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="am-u-sm-3">
+
+                            Temperament
+                        </div>
+                        <div class="am-u-sm-9">
+
+                            <label class="am-checkbox-inline">
+                                        <input type="checkbox" value="Think" data-am-ucheck id="Think1" name="chk">Think
+                                    </label>
+
+                            <label class="am-checkbox-inline">
+                                        <input type="checkbox" value="Feel" data-am-ucheck id="Feel1" name="chk">Feel
+                                    </label>
+
+                            <label class="am-checkbox-inline">
+                                        <input type="checkbox" value="Act" data-am-ucheck id="Act1" name="chk">Act
+                                    </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="am-u-sm-2">
+                            Arosual
+                        </div>
+                        <div class="am-u-sm-10">
+                            <label class="am-checkbox-inline">
+                                        <input type="checkbox" value="Introvert" data-am-ucheck id="Introvert1" name="chk">Introvert
+                                    </label>
+
+                            <label class="am-checkbox-inline">
+                                        <input type="checkbox" value="Extrovert" data-am-ucheck id="Extrovert1" name="chk">Extrovert
+                                    </label>
+
+                            <label class="am-checkbox-inline">
+                                        <input type="checkbox" value="Introvert/extrovert" data-am-ucheck id="Intorvert/extrovert1" name="chk">Introvert/extrovert
+                                    </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="am-u-sm-3">
+                            Stimuli
+                        </div>
+                        <div class="am-u-sm-9">
+                            <label class="am-checkbox-inline">
+                                        <input type="checkbox" value="HSP" data-am-ucheck id="HSP1" name="chk">HSP
+                                    </label>
+
+                            <label class="am-checkbox-inline">
+                                        <input type="checkbox" value="HSS" data-am-ucheck id="HSS1" name="chk">HSS
+                                    </label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="am-form-group" id="tips1"></div>
+                <div class="am-form-group">
+                    <label class="tag">Keyword</label>
+                    <input type="text" class="" id="keyword1" placeholder="Please input file keyword, split by Blank" name="keyword">
+
+                </div>
+                <div class="am-form-group">
+                    <div class="am-g">
+
+                        <div class="am-u-sm-5 am-u-sm-offset-1">
+                            <button id="update" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">upload </button>
+                        </div>
+                        <div class="am-u-sm-5 am-u-end">
+                            <a id="reset1" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn">Reset</a>
                         </div>
                     </div>
                 </div>

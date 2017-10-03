@@ -95,6 +95,11 @@ def content(request):
                 return JsonResponse({"status":1})
             else:
                 return JsonResponse({"status":0})
+        elif (operation == 'require'):
+            content = Content.objects.get(id=request.POST.get('id'))
+            content_json = json.dumps(content)
+            content_json.append({"status": 1})
+            return JsonResponse(content_json)
         else:
             if (operation == 'delete'):
                 content = Content.objects.get(id=request.POST.get('id'))
@@ -109,6 +114,7 @@ def content(request):
                 profilesText = request.POST.getlist('profileSearch')
                 if focus == "All Focuses":
                     q = Content.objects.all()
+
                 else:
                     q = Content.objects.filter(focus=focus)
 
