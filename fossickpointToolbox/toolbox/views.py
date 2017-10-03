@@ -6,7 +6,7 @@ from .forms import UploadFileForm, ContentForm
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse
-from .models import User,PersonalInfo,Content,Profile,Program
+from .models import User,PersonalInfo,Content,Profile,Program,ProgramDetail
 from django.http import JsonResponse
 from django.db.models import Q
 
@@ -75,12 +75,19 @@ def user_home(request):
 def content(request):
     if request.method == 'POST':
         operation = request.POST.get('operation')
+        #add content
         if (operation == 'add'):
             form = UploadFileForm(request.POST, request.FILES)
             if form.is_valid():
                 profile = request.POST.get('profile')
                 title = request.POST.get('title')
-                content = Content(name=title,type=request.POST.get('type'),tag=request.POST.get('tag'), keyword=request.POST.get('keyword'),address=request.FILES['file'],focus=request.POST.get('focus'),profileText=profile)
+                type = request.POST.get('type')
+                if 'thumbnail' in request.FILES:
+                    content = Content(name=title,type=request.POST.get('type'),tag=request.POST.get('tag'), keyword=request.POST.get('keyword'),address=request.FILES['file'],focus=request.POST.get('focus'),profileText=profile,thumbnail=request.FILES['thumbnail'])
+                else:
+                    thumbnail = 'contents/' + type + '.png'
+                    content = Content(name=title,type=request.POST.get('type'),tag=request.POST.get('tag'), keyword=request.POST.get('keyword'),address=request.FILES['file'],focus=request.POST.get('focus'),profileText=profile,thumbnail=thumbnail)
+
                 profiles = profile.split(';')
                 content.save()
                 for aProfile in profiles:
@@ -119,6 +126,8 @@ def content(request):
                 return render(request, "toolbox/content.html", context)
 
     contentList = Content.objects.all().values()
+    for content in contentList:
+        content["thumbnail"] = content["thumbnail"].split("/")[1]
     context = {'contentList':contentList}
     return render(request,"toolbox/content.html",context)
 
@@ -144,9 +153,38 @@ def programs(request):
 
 def program(request, programID):
     if (request.method) == 'POST':
-        
+        operation = request.POST.get('operation')
+        if operation == 'update':
+            aProgram = Program.objects.filter(id=programID)
+            contentsNumber = 0
+            for key, val in request.POST.iteritems():
+                contentsNumber = contentsNumber + 1
+                aContent = Content.objects.get(id=val)
+                programDetail = ProgramDetail.objects.filter(program=aProgram, content=aContent)
+                if (programDetail):
+                    programDetail.update(order=key)
+                else:
+                    programDetail = ProgramDetail(content=aContent, program=aProgram, order=key)
+                    programDetail.save()
+            aProgram.update(contentsNumber=contentsNumber)
+            return JsonResponse({"status" : 1})
+
+        if operation == 'delete':
+            aProgram = Program.objects.filter(id=programID)
+            contentId = request.POST.get('contentId')
+
+            aContent = Content.objects.filter(id=contentId)
+            order = ProgramDetail.objects.filter(program = aProgram, content=aContent).order
+            ProgramDetail.objects.filter()
+
+    aProgram = Program.objects.get(id=programID)
     contentList = Content.objects.all().values()
-    context = {'programID': programID,'contentList':contentList}
+    programDetails = ProgramDetail.objects.filter(program=aProgram).order_by("order")
+    programContents = []
+    for programDetail in programDetails:
+        aContent = programDetail.content
+        programContents.append(aContent)
+    context = {'programID': programID,'contentList':contentList, 'program': programContents}
 
     return render(request, "toolbox/program.html", context)
 
@@ -154,6 +192,7 @@ def user(request):
     studentList = User.objects.filter(userType=1)
 
     return render(request,"toolbox/user.html",{'studentList':studentList})
+
 
 
 

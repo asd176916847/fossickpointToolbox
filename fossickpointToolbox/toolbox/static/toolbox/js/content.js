@@ -86,10 +86,12 @@ $(document).ready(function(){
 
     $("#upload").click(function(){
         var fileobj = $("#doc-form-file")[0].files[0];
+        var fileobj2 = $("#doc-form-thumbnail")[0].files[0];
         var form = new FormData();
 //        var csrf_token = getCookie('csrftoken');
         form.append('operation','add');
         form.append('file',fileobj);
+        form.append('thumbnail', fileobj2);
         form.append('title', $("#title").val());
         form.append('type',$("#selectedType").val());
         form.append('tag',$("#tag").val());

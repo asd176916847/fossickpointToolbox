@@ -4,7 +4,6 @@
 <script src="{% static 'toolbox/js/layer.js' %}"></script>
 
 {% endblock %} {% block title %} Contents {% endblock %} {% block main %}
-
 <div class="row-content am-cf">
     <div class="row">
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
@@ -109,7 +108,8 @@
                             <tbody id="contentTable">
                                 {% if contentList %} {% for content in contentList %}
                                 <tr class="gradeX">
-                                    <td>{{content.name}}</td>
+                                    <!--<td>{{content.name}}</td>-->
+                                    <td><img src="../static/{{content.thumbnail}}" style="width:100px; height:100px"></td>
                                     <td>{{content.focus}}</td>
                                     <td>{{content.tag}}</td>
                                     <td>{{content.profileText}}</td>
@@ -170,7 +170,13 @@
                             <i class="am-icon-cloud-upload"></i> Please select file</button>
                     <input id="doc-form-file" type="file" name="uploadFile" multiple>
                 </div><span><p id="file-list"></p></span>
-                <script>
+
+                                <div class="am-form-group am-form-file">
+                    <button type="button" class="am-btn am-btn-danger am-btn-sm">
+                        <i class="am-icon-cloud-upload"></i> Please select thumbnail</button>
+                    <input id="doc-form-thumbnail" type="file" name="uploadFile" multiple>
+                </div><span><p id="thumbnail-list"></p></span>
+                                <script>
                     $(function () {
                         $('#doc-form-file').on('change', function () {
                             var fileNames = '';
@@ -180,9 +186,18 @@
                             $('#file-list').html(fileNames);
                         });
                     });
+                    $(function () {
+                        $('#doc-form-thumbnail').on('change', function () {
+                            var fileNames = '';
+                            $.each(this.files, function () {
+                                fileNames += '<span class="am-badge">' + this.name + '</span> ';
+                            });
+                            $('#thumbnail-list').html(fileNames);
+                        });
+                    });
                 </script>
                 <div class="am-form-group">
-                    <label class="tag">Title</label>
+                    <label class="tag">Name</label>
                     <input type="text" class="" id="title" name="title" placeholder="Please input file keyword, split by Blank">
 
                 </div>

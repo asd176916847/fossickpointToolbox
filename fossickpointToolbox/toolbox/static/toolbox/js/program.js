@@ -27,18 +27,17 @@ $.ajaxSetup({
     }
 });
 $(document).ready(function(){
-    var contentList = document.getElementById('contentList');
-    var sortable = Sortable.create(contentList, {group: "content"});
+  //  var contentList = document.getElementById('contentList');
+  //  var sortable = Sortable.create(contentList, {group: "content"});
 
     var programList = document.getElementById('programList');
     var sortable2 = Sortable.create(programList, {group: "content"});
-    // Sortable.create(qux,{
-    //     group:{
-    //         name: 'qux',
-    //         put: ['content','program']
-    //     },
-    //     animation:100
-    // })
+
+    $('#programDiv').bind("DOMSubtreeModified",function(){
+        $("#programDiv  button").css("display","block");
+
+    });
+
 })
 
 function updateProgram()
@@ -48,6 +47,7 @@ function updateProgram()
     programList.each(function(index){
         form.append(index, $(this).attr("id"));
     })
+    form.append("operation", "update")
     $.ajax({
         type:'POST',
         url:  location.href,
@@ -70,3 +70,30 @@ function updateProgram()
         }
     });
 }
+
+//function deleteContent(contentId)
+//{
+//    var form = new FormData();
+//    form.append("contentId", contentId)
+//    form.append("operation", "delete")
+//    $.ajax({
+//        type:'POST',
+//        url:  location.href,
+//        data:form,
+//        processData:false,  // 告诉jquery不转换数据
+//        contentType:false,  // 告诉jquery不设置内容格式
+//
+//        success:function (arg) {
+//            if (arg["status"] == "1")
+//            {
+//                alert("delete content successfully");
+//                location.reload();
+//
+//            }
+//            else
+//            {
+//                alert("delete content failed");
+//            }
+//        }
+//    })
+//}

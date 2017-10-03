@@ -1,5 +1,9 @@
 from django.conf.urls import url
+
+from fossickpointToolbox import settings
 from . import views
+from django.conf.urls import include, url
+
 
 urlpatterns = [
     url(r'^$', views.index, name="index"),
@@ -11,3 +15,6 @@ urlpatterns = [
     url(r'^programs/',views.programs,name="program"),
     url(r'^program/(?P<programID>[0-9]+)/$',views.program,name="programdetail"),
 ]
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+urlpatterns += staticfiles_urlpatterns()
