@@ -1,7 +1,7 @@
 import json
 import os
 from itertools import chain
-
+from django.core import serializers
 from .forms import UploadFileForm, ContentForm
 from django.shortcuts import render, redirect
 from django.template import loader
@@ -71,8 +71,11 @@ def user_home(request):
     #     return HttpResponse("login successful")
     # else:
     #     return HttpResponse("You have not login")
-
-def content(request):
+def content(request,contentID):
+    content = Content.objects.get(id=contentID)
+    context = {"content" : content}
+    return render(request, "toolbox/content.html", context)
+def contents(request):
     if request.method == 'POST':
         operation = request.POST.get('operation')
         #add content
@@ -97,8 +100,8 @@ def content(request):
                 return JsonResponse({"status":0})
         elif (operation == 'require'):
             content = Content.objects.get(id=request.POST.get('id'))
-            content_json = json.dumps(content)
-            content_json.append({"status": 1})
+            content_json = serializers.serialize('json', [content, ])
+            content_json += "status:1"
             return JsonResponse(content_json)
         else:
             if (operation == 'delete'):
@@ -117,7 +120,6 @@ def content(request):
 
                 else:
                     q = Content.objects.filter(focus=focus)
-
                 if tag != "All tags":
                     q = q.filter(tag=tag)
                 if profilesText[0] != "All profiles":
@@ -128,14 +130,18 @@ def content(request):
                         q2 = chain(q3,q2)
                     q = set(q2)
                 contentList = q
-                context = {'contentList':contentList}
-                return render(request, "toolbox/content.html", context)
+                list = [];
+                for content in contentList.values():
+                    content["thumbnail"] = content["thumbnail"].split("/")[1]
+                    list.append(content)
+                context = {'contentList':list}
+                return render(request, "toolbox/contents.html", context)
 
     contentList = Content.objects.all().values()
     for content in contentList:
         content["thumbnail"] = content["thumbnail"].split("/")[1]
     context = {'contentList':contentList}
-    return render(request,"toolbox/content.html",context)
+    return render(request,"toolbox/contents.html",context)
 
 
 def handle_uploaded_file(f):
@@ -190,7 +196,7 @@ def program(request, programID):
     for programDetail in programDetails:
         aContent = programDetail.content
         programContents.append(aContent)
-    context = {'programID': programID,'contentList':contentList, 'program': programContents}
+    context = {'programID': programID,'contentList':contentList, 'program': programContents,'programName': aProgram.name}
 
     return render(request, "toolbox/program.html", context)
 

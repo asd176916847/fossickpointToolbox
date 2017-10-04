@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
-import sorl.thumbnail.fields
+
 
 
 class Migration(migrations.Migration):
@@ -12,10 +12,5 @@ class Migration(migrations.Migration):
         ('toolbox', '0019_auto_20171003_0605'),
     ]
 
-    operations = [
-        migrations.AlterField(
-            model_name='content',
-            name='thumbnail',
-            field=sorl.thumbnail.fields.ImageField(null=True, upload_to='contents/'),
-        ),
-    ]
+
+

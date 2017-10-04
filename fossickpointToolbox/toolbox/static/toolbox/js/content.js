@@ -33,7 +33,7 @@ function deleteContent(id)
         if (result["status"] == 1)
         {
             alert("delete successfully");
-            window.location.href='../content';
+            window.location.href='../contents';
         }
 
 
@@ -134,7 +134,7 @@ $(document).ready(function() {
             success: function (arg) {
                 if (arg["status"] == "1") {
                     alert("upload file successfully");
-                    window.location.href = '../content';
+                    window.location.href = '../contents';
                 }
                 else {
                     alert("upload file failed, please finish the form");
@@ -142,6 +142,7 @@ $(document).ready(function() {
                 }
             }
         })
+   })
 
         $("#update").click(function () {
             var fileobj = $("#doc-form-file")[0].files[0];
@@ -173,7 +174,7 @@ $(document).ready(function() {
                 success: function (arg) {
                     if (arg["status"] == "1") {
                         alert("Update content details successfully");
-                        window.location.href = '../content';
+                        window.location.href = '../contents';
                     }
                     else {
                         alert("Update content details, please finish the form");
@@ -186,5 +187,5 @@ $(document).ready(function() {
                 clearUploadForm();
             });
         });
-    });
+
 })
