@@ -52,25 +52,25 @@ def user_register(request):
 
 
 def user_home(request):
-    #try:
+    try:
         user = User.objects.get(id = request.session['uuid'])
         if (user.userType == 0):
             response = ""
             info = {'userName' : user.userName,'contentCount' : Content.objects.count(), 'userCount' : User.objects.filter(userType=1).count()}
-            #"contentCount":Content.objects.count()}
-            #for student in studentList:
-            #    response += student.userName + "<br>"
-            #return HttpResponse("Welcome admin. Your student List:<br>" + response )
+            "contentCount":Content.objects.count()}
+            for student in studentList:
+               response += student.userName + "<br>"
+            return HttpResponse("Welcome admin. Your student List:<br>" + response )
             return render(request, "toolbox/homepage.html",info)
         else:
             return HttpResponse("Welcome " + user.userName)
-    #except:
-    #    return HttpResponse("error")
-    #return JsonResponse({"id":request.session['uuid']})
-    # if (request.session['uuid']):
-    #     return HttpResponse("login successful")
-    # else:
-    #     return HttpResponse("You have not login")
+    except:
+       return HttpResponse("error")
+    return JsonResponse({"id":request.session['uuid']})
+    if (request.session['uuid']):
+        return HttpResponse("login successful")
+    else:
+        return HttpResponse("You have not login")
 def content(request,contentID):
     content = Content.objects.get(id=contentID)
     context = {"content" : content}
@@ -184,11 +184,17 @@ def program(request, programID):
         if operation == 'delete':
             aProgram = Program.objects.filter(id=programID)
             contentId = request.POST.get('contentId')
-
             aContent = Content.objects.filter(id=contentId)
             order = ProgramDetail.objects.filter(program = aProgram, content=aContent).order
             ProgramDetail.objects.filter()
-
+        if operation == 'add':
+            aProgram = Program.objects.filter(id=programID)
+            contentId = request.POST.get('contentId')
+            aContent = Content.objects.filter(id=contentId)
+            order = aProgram.contentsNumber + 1
+            programDetail = ProgramDetail(content=aContent, program=aProgram, order=order)
+            programDetail.save()
+            aProgram.update(order=order)
     aProgram = Program.objects.get(id=programID)
     contentList = Content.objects.all().values()
     programDetails = ProgramDetail.objects.filter(program=aProgram).order_by("order")
