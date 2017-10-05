@@ -29,7 +29,7 @@ $.ajaxSetup({
 
 function deleteContent(id)
 {
-    $.post('./content',{'operation':'delete','id':id},function (result){
+    $.post('./contents',{'operation':'delete','id':id},function (result){
         if (result["status"] == 1)
         {
             alert("delete successfully");
@@ -126,7 +126,7 @@ $(document).ready(function() {
         form.append('profile', profile);
         $.ajax({
             type: 'POST',
-            url: '../content/',
+            url: '../contents/',
             data: form,
             processData: false,  // 告诉jquery不转换数据
             contentType: false,  // 告诉jquery不设置内容格式
@@ -166,7 +166,7 @@ $(document).ready(function() {
             form.append('profile', profile);
             $.ajax({
                 type: 'POST',
-                url: '../content/',
+                url: '../contents/',
                 data: form,
                 processData: false,  // 告诉jquery不转换数据
                 contentType: false,  // 告诉jquery不设置内容格式

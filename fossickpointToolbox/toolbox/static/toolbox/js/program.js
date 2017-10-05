@@ -33,10 +33,7 @@ $(document).ready(function(){
     var programList = document.getElementById('programList');
     var sortable2 = Sortable.create(programList, {group: "content"});
 
-    $('#programDiv').bind("DOMSubtreeModified",function(){
-        $("#programDiv  button").css("display","block");
 
-    });
 
 })
 
@@ -71,29 +68,57 @@ function updateProgram()
     });
 }
 
-//function deleteContent(contentId)
-//{
-//    var form = new FormData();
-//    form.append("contentId", contentId)
-//    form.append("operation", "delete")
-//    $.ajax({
-//        type:'POST',
-//        url:  location.href,
-//        data:form,
-//        processData:false,  // 告诉jquery不转换数据
-//        contentType:false,  // 告诉jquery不设置内容格式
-//
-//        success:function (arg) {
-//            if (arg["status"] == "1")
-//            {
-//                alert("delete content successfully");
-//                location.reload();
-//
-//            }
-//            else
-//            {
-//                alert("delete content failed");
-//            }
-//        }
-//    })
-//}
+function addContent(id)
+{
+    var form = new FormData();
+    form.append("contentId", id)
+    form.append("operation", "add")
+        $.ajax({
+        type:'POST',
+        url:  location.href,
+        data:form,
+        processData:false,  // 告诉jquery不转换数据
+        contentType:false,  // 告诉jquery不设置内容格式
+
+        success:function (arg) {
+            if (arg["status"] == "1")
+            {
+                alert("add content to program successfully");
+                location.reload();
+
+            }
+            else
+            {
+                alert("create content to program failed");
+
+            }
+        }
+    });
+}
+function deleteContent(contentId)
+{
+    var form = new FormData();
+    form.append("contentId", contentId)
+    form.append("operation", "delete")
+    $.ajax({
+        type:'POST',
+        url:  location.href,
+        data:form,
+        processData:false,  // 告诉jquery不转换数据
+        contentType:false,  // 告诉jquery不设置内容格式
+
+        success:function (arg) {
+            if (arg["status"] == "1")
+            {
+                                alert(`${contentId}`)
+                $(`#${contentId}`).remove();
+                alert("hello")
+                updateProgram()
+            }
+            else
+            {
+                alert("delete content failed");
+            }
+        }
+    })
+}

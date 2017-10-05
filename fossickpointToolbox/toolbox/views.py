@@ -52,25 +52,25 @@ def user_register(request):
 
 
 def user_home(request):
-    try:
+    # try:
         user = User.objects.get(id = request.session['uuid'])
         if (user.userType == 0):
             response = ""
             info = {'userName' : user.userName,'contentCount' : Content.objects.count(), 'userCount' : User.objects.filter(userType=1).count()}
-            "contentCount":Content.objects.count()}
-            for student in studentList:
-               response += student.userName + "<br>"
-            return HttpResponse("Welcome admin. Your student List:<br>" + response )
+            # "contentCount":Content.objects.count()}
+            # for student in studentList:
+            #    response += student.userName + "<br>"
+            # return HttpResponse("Welcome admin. Your student List:<br>" + response )
             return render(request, "toolbox/homepage.html",info)
         else:
             return HttpResponse("Welcome " + user.userName)
-    except:
-       return HttpResponse("error")
-    return JsonResponse({"id":request.session['uuid']})
-    if (request.session['uuid']):
-        return HttpResponse("login successful")
-    else:
-        return HttpResponse("You have not login")
+    # except:
+    #    return HttpResponse("error")
+    # return JsonResponse({"id":request.session['uuid']})
+    # if (request.session['uuid']):
+    #     return HttpResponse("login successful")
+    # else:
+    #     return HttpResponse("You have not login")
 def content(request,contentID):
     content = Content.objects.get(id=contentID)
     context = {"content" : content}
@@ -170,39 +170,55 @@ def program(request, programID):
             aProgram = Program.objects.filter(id=programID)
             contentsNumber = 0
             for key, val in request.POST.iteritems():
-                contentsNumber = contentsNumber + 1
-                aContent = Content.objects.get(id=val)
-                programDetail = ProgramDetail.objects.filter(program=aProgram, content=aContent)
-                if (programDetail):
-                    programDetail.update(order=key)
-                else:
-                    programDetail = ProgramDetail(content=aContent, program=aProgram, order=key)
-                    programDetail.save()
+                if key != 'operation':
+                    contentsNumber = contentsNumber + 1
+                    aContent = Content.objects.get(id=val)
+                    programDetail = ProgramDetail.objects.filter(program=aProgram, content=aContent)
+                    if (programDetail):
+                        programDetail.update(order=key)
+                    else:
+                        programDetail = ProgramDetail(content=aContent, program=aProgram, order=key)
+                        programDetail.save()
             aProgram.update(contentsNumber=contentsNumber)
             return JsonResponse({"status" : 1})
 
         if operation == 'delete':
             aProgram = Program.objects.filter(id=programID)
+            aProgramObj = Program.objects.get(id=programID)
+            contentsNumber = aProgramObj.contentsNumber
             contentId = request.POST.get('contentId')
             aContent = Content.objects.filter(id=contentId)
-            order = ProgramDetail.objects.filter(program = aProgram, content=aContent).order
-            ProgramDetail.objects.filter()
+            programDetail = ProgramDetail.objects.filter(program=aProgram, content=aContent)
+            programDetail.delete()
+            aProgram.update(contentsNumber=contentsNumber - 1)
+            return JsonResponse({"status" : 1})
         if operation == 'add':
             aProgram = Program.objects.filter(id=programID)
+            aProgramObj = Program.objects.get(id=programID)
             contentId = request.POST.get('contentId')
-            aContent = Content.objects.filter(id=contentId)
-            order = aProgram.contentsNumber + 1
-            programDetail = ProgramDetail(content=aContent, program=aProgram, order=order)
+            aContent = Content.objects.get(id=contentId)
+            order = aProgramObj.contentsNumber
+            programDetail = ProgramDetail(content=aContent, program=aProgramObj, order=order)
             programDetail.save()
-            aProgram.update(order=order)
+            aProgram.update(contentsNumber=order + 1)
+            return JsonResponse({"status" : 1})
     aProgram = Program.objects.get(id=programID)
-    contentList = Content.objects.all().values()
+    contentList = list(Content.objects.all())
     programDetails = ProgramDetail.objects.filter(program=aProgram).order_by("order")
     programContents = []
+   # contentList = []
     for programDetail in programDetails:
         aContent = programDetail.content
-        programContents.append(aContent)
-    context = {'programID': programID,'contentList':contentList, 'program': programContents,'programName': aProgram.name}
+        aContentDict = dict(aContent)
+        aContentDict["thumbnail"] = aContentDict["thumbnail"].split("/")[1]
+        programContents.append(aContentDict)
+        contentList.remove(aContent)
+    contentDictList = []
+    for content in contentList:
+        contentDict=dict(content)
+        contentDict["thumbnail"] = contentDict["thumbnail"].split("/")[1]
+        contentDictList.append(contentDict)
+    context = {'programID': programID,'contentList':contentDictList, 'program': programContents,'programName': aProgram.name}
 
     return render(request, "toolbox/program.html", context)
 

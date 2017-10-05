@@ -41,6 +41,14 @@ class Content(models.Model):
     def __str__(selfs):
         return selfs.name
 
+    def __iter__(self):
+        yield 'name', self.name
+        yield 'focus', self.focus
+        yield 'tag', self.tag
+        yield 'thumbnail', self.thumbnail.url
+        yield 'id', self.id
+        yield 'profileText', self.profileText
+
 
 
 class Group(models.Model):
