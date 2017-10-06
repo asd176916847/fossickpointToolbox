@@ -31,6 +31,34 @@ function viewProgram(programid)
 {
     location.href = "../program/" + programid;
 }
+
+function deleteProgram(programId)
+{
+    var form = new FormData();
+    form.append('operation', "delete")
+    form.append('programId', programId)
+    $.ajax({
+    type:'POST',
+    url:'../programs/',
+    data:form,
+    processData:false,  // 告诉jquery不转换数据
+    contentType:false,  // 告诉jquery不设置内容格式
+
+    success:function (arg) {
+        if (arg["status"] == "1")
+        {
+            alert("Delete program successfully");
+            window.location.href='../programs';
+
+        }
+        else
+        {
+            alert("Delete program failed");
+
+        }
+    }
+    });
+}
 $(document).ready(function(){
     $("#add").click(function(){
         //调用函数居中窗口

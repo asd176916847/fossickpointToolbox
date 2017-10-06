@@ -4,6 +4,7 @@
 <script src="{% static 'toolbox/js/layer.js' %}"></script>
 
 {% endblock %}
+{% block pagetitle %} Programs {% endblock %}
 {% block title %} Program {% endblock %}
 {% block main %}
 <div class="row-content am-cf">
@@ -66,7 +67,7 @@
                             {{program.name}}
                                                 <span class="am-btn-group am-btn-group-xs am-fr"  style="padding-left:40px">
                                     <button type="button" class="am-btn am-btn-primary" style="margin-right:10px" onclick="viewProgram('{{program.id}}')"><span class="am-icon-plus"></span>View</button>
-                                    <button type="button" class="am-btn am-btn-primary"><span class="am-icon-plus"></span>Delete</button>
+                                    <button type="button" class="am-btn am-btn-primary" onclick="deleteProgram({{program.id}})"><span class="am-icon-plus"></span>Delete</button>
 
                                 </span>
                         </div>
@@ -98,7 +99,7 @@
         <!--{% csrf_token %}-->
         <div class="am-form tpl-form-line-form">
             <fieldset>
-                <legend>Add content</legend>
+                <legend>Add program</legend>
             </fieldset>
             <div class="am-form-group">
                     <label class="tag">Program name</label>

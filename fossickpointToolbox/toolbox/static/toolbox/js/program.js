@@ -73,7 +73,7 @@ function addContent(id)
     var form = new FormData();
     form.append("contentId", id)
     form.append("operation", "add")
-        $.ajax({
+    $.ajax({
         type:'POST',
         url:  location.href,
         data:form,

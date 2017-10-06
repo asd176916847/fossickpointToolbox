@@ -8,7 +8,7 @@
                         </div>
                         <div class="widget-statistic-body">
                             <div class="widget-statistic-value" align = "center">
-                                <a href="../content">{{contentCount}}</a>
+                                <a href="{% url 'contents' %}">{{contentCount}}</a>
                             </div>
 
                             <span class="widget-statistic-icon am-icon-credit-card-alt"></span>
@@ -22,13 +22,26 @@
                         </div>
                         <div class="widget-statistic-body">
                             <div class="widget-statistic-value" align = "center">
-                                <a href="../user">{{userCount}}</a>
+                                <a href="{% url 'user' %}">{{userCount}}</a>
                             </div>
-
                             <span class="widget-statistic-icon am-icon-credit-card-alt"></span>
                         </div>
                     </div>
 
                 </div>
             </div>
+                <div class="am-u-sm-18 am-u-md-9 am-u-lg-6">
+                    <div class="widget widget-primary am-cf">
+                        <div class="widget-statistic-header" style="font-size:18px" >
+                            Program Count
+                        </div>
+                        <div class="widget-statistic-body">
+                            <div class="widget-statistic-value" align = "center">
+                                <a href="{% url 'program' %}">{{programCount}}</a>
+                            </div>
+                            <span class="widget-statistic-icon am-icon-credit-card-alt"></span>
+                        </div>
+                    </div>
+
+                </div>
 {% endblock %}

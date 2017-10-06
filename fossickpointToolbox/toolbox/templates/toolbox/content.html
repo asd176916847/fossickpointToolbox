@@ -1,4 +1,4 @@
-{% extends 'toolbox/_base.html' %} {% load static %} {% block csslink %} {% endblock %} {% block title %} Program {% endblock %} {% block main %}
+{% extends 'toolbox/_base.html' %} {% load static %} {% block csslink %} {% endblock %} {% block title %} Content {% endblock %} {% block main %}
 <!-- <script src="{% static 'toolbox/js/jquery.sortable.js' %}"></script> -->
 <script src="//cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 <script src="{% static 'toolbox/js/program.js' %}"></script>
@@ -192,7 +192,7 @@
                         <div style="margin-top:40px;" id="contentDiv">
                         <ol id="contentList" class="am-list-static am-list-striped" style="height: 500px;" >
                             {% if programList %} {% for program in programList %}
-                            <li id="{{content.id}}"><a href="{% url 'program' programID=program.id %}">{{program.name}}</a></li>
+                            <li id="{{content.id}}"><a href="{% url 'programdetail' programID=program.id %}">{{program.name}}</a></li>
                             {% endfor %} {% endif %}
                         </ol>
                     </div>

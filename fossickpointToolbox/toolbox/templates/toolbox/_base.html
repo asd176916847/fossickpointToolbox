@@ -2,6 +2,7 @@
 {% include 'toolbox/_header.html'%}
 {% block csslink %}
 {% endblock %}
+    <title>{% block pagetitle %}Home {% endblock %}</title>
 </head>
 <body data-type="index">
     <script src="{% static 'toolbox/js/theme.js' %}"></script>
@@ -27,7 +28,7 @@
 
                         <!-- sign out -->
                         <li class="am-text-sm">
-                            <a href="javascript:;">
+                            <a href="javascript:;" onclick="logout()">
                                 <span class="am-icon-sign-out"></span> Log out
                             </a>
                         </li>
