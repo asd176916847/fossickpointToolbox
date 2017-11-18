@@ -10,10 +10,11 @@ from .models import User,PersonalInfo,Content,Profile,Program,ProgramDetail
 from django.http import JsonResponse
 from django.db.models import Q
 
-
+# /index
 def index(request):
     return render(request,"toolbox/index.html")
 
+# /login
 def user_login(request):
     if (request.POST):
         userName = request.POST.get('userName')
@@ -22,15 +23,19 @@ def user_login(request):
             user = User.objects.get(userName = userName)
         except:
             return HttpResponse("login failed")
-        #User.
+
         if (user is not None and user.userPassword == password):
             request.session['uuid'] = user.id
             return JsonResponse({"status": 0})
         else:
             return JsonResponse({"status": 1})
+
+# /logout
 def logout(request):
     del request.session['uuid']
     return JsonResponse({"status": 1})
+
+# /register
 def user_register(request):
     if (request.POST):
         userName = request.POST.get('userName')
@@ -52,35 +57,45 @@ def user_register(request):
             return JsonResponse({"status": 1})
     return render(request,"toolbox/register.html")
 
-
+# /home
 def user_home(request):
      try:
         user = User.objects.get(id = request.session['uuid'])
         if (user.userType == 0):
             response = ""
             info = {'userName' : user.userName,'contentCount' : Content.objects.count(), 'userCount' : User.objects.filter(userType=1).count(), 'programCount': Program.objects.count()}
-            # "contentCount":Content.objects.count()}
-            # for student in studentList:
-            #    response += student.userName + "<br>"
-            # return HttpResponse("Welcome admin. Your student List:<br>" + response )
+
             return render(request, "toolbox/homepage.html",info)
         else:
+            # to do
+            # user side
             return HttpResponse("Welcome " + user.userName)
      except:
          return HttpResponse("You have not login")
+
+# /content
 def content(request,contentID):
     if 'uuid' in request.session:
+        # todo
+        # update content
         content = Content.objects.get(id=contentID)
         programdetails = ProgramDetail.objects.filter(content=content)
         programList = []
         for programdetail in programdetails:
             program = programdetail.program
             programList.append(program)
+
+        # return content detail
         context = {"content" : content, "programList": programList}
+        #todo
+        #content preview
         return render(request, "toolbox/content.html", context)
     else:
         return HttpResponse("You have not login")
+    # todo
+    # userside
 
+# /contents
 def contents(request):
     if 'uuid' in request.session:
 
@@ -93,6 +108,7 @@ def contents(request):
                     profile = request.POST.get('profile')
                     title = request.POST.get('title')
                     type = request.POST.get('type')
+                    # if user has uploaded a thumbnail, use it. Otherwise use a default thumbnail depending on type of uploading file
                     if 'thumbnail' in request.FILES:
                         content = Content(name=title,type=request.POST.get('type'),tag=request.POST.get('tag'), keyword=request.POST.get('keyword'),address=request.FILES['file'],focus=request.POST.get('focus'),profileText=profile,thumbnail=request.FILES['thumbnail'])
                     else:
@@ -106,45 +122,46 @@ def contents(request):
                     return JsonResponse({"status":1})
                 else:
                     return JsonResponse({"status":0})
+            # return needed content
             elif (operation == 'require'):
                 content = Content.objects.get(id=request.POST.get('id'))
                 content_json = serializers.serialize('json', [content, ])
                 content_json += "status:1"
                 return JsonResponse(content_json)
+            elif (operation == 'delete'):
+                content = Content.objects.get(id=request.POST.get('id'))
+                address = content.address
+                os.remove(address.name)
+                content.delete()
+                return JsonResponse({"status":1})
+            # search content
             else:
-                if (operation == 'delete'):
-                    content = Content.objects.get(id=request.POST.get('id'))
-                    address = content.address
-                    os.remove(address.name)
-                    content.delete()
-                    return JsonResponse({"status":1})
-                else:
-                    focus = request.POST.get('focusSearch')
-                    tag = request.POST.get('tagSearch')
-                    keyword = request.POST.get('keywordSearch')
-                    profilesText = request.POST.getlist('profileSearch')
-                    # if focus == "All Focuses":
-                    #     q = Content.objects.all()
-                    #
-                    # else:
-                    #     q = Content.objects.filter(focus=focus)
-                    # if tag != "All tags":
-                    #     q = q.filter(tag=tag)
-                    # if profilesText[0] != "All profiles":
-                    #     q2 = Content.objects.filter(tag="null")
-                    #     for profileText in profilesText:
-                    #         aProfile = Profile.objects.get(profileName=profileText)
-                    #         q3 = q.filter(profile=aProfile)
-                    #         q2 = chain(q3,q2)
-                    #     q = set(q2)
-                    # contentList = q
-                    # list = [];
-                    # for content in contentList.values():
-                    #     content["thumbnail"] = content["thumbnail"].split("/")[1]
-                    #     list.append(content)
-                    list = search(focus=focus, tag=tag, profilesText=profilesText)
-                    context = {'contentList':list}
-                    return render(request, "toolbox/contents.html", context)
+                focus = request.POST.get('focusSearch')
+                tag = request.POST.get('tagSearch')
+                keyword = request.POST.get('keywordSearch')
+                profilesText = request.POST.getlist('profileSearch')
+                # if focus == "All Focuses":
+                #     q = Content.objects.all()
+                #
+                # else:
+                #     q = Content.objects.filter(focus=focus)
+                # if tag != "All tags":
+                #     q = q.filter(tag=tag)
+                # if profilesText[0] != "All profiles":
+                #     q2 = Content.objects.filter(tag="null")
+                #     for profileText in profilesText:
+                #         aProfile = Profile.objects.get(profileName=profileText)
+                #         q3 = q.filter(profile=aProfile)
+                #         q2 = chain(q3,q2)
+                #     q = set(q2)
+                # contentList = q
+                # list = [];
+                # for content in contentList.values():
+                #     content["thumbnail"] = content["thumbnail"].split("/")[1]
+                #     list.append(content)
+                list = search(focus=focus, tag=tag, profilesText=profilesText)
+                context = {'contentList':list}
+                return render(request, "toolbox/contents.html", context)
 
         contentList = Content.objects.all().values()
         for content in contentList:

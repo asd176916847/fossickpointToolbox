@@ -43,7 +43,7 @@ function deleteContent(id)
 function editContent(id)
 {
 
-    $.post('./content',{'operation':'require','id':id},function (result){
+    $.post('./contents',{'operation':'require','id':id},function (result){
         if (result["status"] == 1)
         {
             layer.open({
@@ -143,7 +143,7 @@ $(document).ready(function() {
             }
         })
    })
-
+        // post /content/id update
         $("#update").click(function () {
             var fileobj = $("#doc-form-file")[0].files[0];
             var fileobj2 = $("#doc-form-thumbnail")[0].files[0];
