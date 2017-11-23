@@ -327,12 +327,13 @@ def users(request):
 
 def user(request,userID=1):
     if 'uuid' in request.session:
+        personalInfo = PersonalInfo.objects.get(id=userID)
         if (request.method) == 'POST':
             operation = request.POST.get("operation")
+            # update user profile and note
             if operation == "update":
                 profile = request.POST.get("profile")
                 note = request.POST.get("note")
-                personalInfo = PersonalInfo.objects.get(id=userID)
                 personalInfo.note = note
                 personalInfo.profile.clear()
                 profiles = profile.split(';')
@@ -341,11 +342,26 @@ def user(request,userID=1):
                         personalInfo.profile.add(Profile.objects.get(profileName=aProfile))
                 personalInfo.save()
                 return JsonResponse({"status": 1})
+            # remove assigned program
+            if operation == "remove":
+                programID = request.POST.get("program")
+                program = Program.objects.get(id=programID)
+                personalInfo.programs.remove(program)
+                return JsonResponse({"status": 1})
+            if operation == "assign":
+                programID = request.POST.get("program")
+                program = Program.objects.get(id=programID)
+                personalInfo.programs.add(program)
+                return JsonResponse({"status": 1})
 
         studentList = PersonalInfo.objects.filter(user__userType=1)
-        programList = Program.objects.all().values()
-        user = PersonalInfo.objects.get(id=userID)
-        return render(request,"toolbox/user.html",{'studentList':studentList, 'programList':programList, 'user':user})
+        programs = personalInfo.programs.all()
+        programNameList = []
+        for program in programs:
+            programNameList.append(program.name)
+        programList = Program.objects.exclude(name__in=programNameList)
+
+        return render(request,"toolbox/user.html",{'studentList':studentList, 'programList':programList, 'user':personalInfo})
 
     else:
         return HttpResponse("You have not login")

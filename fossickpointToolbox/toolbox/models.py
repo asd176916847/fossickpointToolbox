@@ -21,6 +21,15 @@ class Profile(models.Model):
 
     class Meta:
         ordering = ('profileName',)
+
+    # program model
+class Program(models.Model):
+    name = models.CharField(max_length=100)
+    describe = models.CharField(max_length=200)
+    contentsNumber = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.name
 # user personal info model
 class PersonalInfo(models.Model):
     user = models.ForeignKey(User)
@@ -36,6 +45,7 @@ class PersonalInfo(models.Model):
     city = models.CharField(max_length=100,null=True, blank=True)
     occupation = models.CharField(max_length=100,null=True, blank=True)
     address = models.CharField(max_length=200,null=True, blank=True)
+    programs = models.ManyToManyField(Program)
     profile = models.ManyToManyField(Profile)
     def __str__(self):
         return self.user.userName
@@ -83,18 +93,9 @@ class UserContent(models.Model):
     def __str__(selfs):
         return selfs.user.name
 
-# program model
-class Program(models.Model):
-    name = models.CharField(max_length=100)
-    describe = models.CharField(max_length=200)
-    contentsNumber = models.IntegerField(default=0)
-    def __str__(self):
-        return self.name
+
 # program detail model
 class ProgramDetail(models.Model):
     content = models.ForeignKey(Content)
     program = models.ForeignKey(Program)
     order = models.IntegerField()
-
-# todo
-# add a model to connect program and user

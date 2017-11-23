@@ -14,6 +14,7 @@ admin.site.register(Program)
 admin.site.register(ProgramDetail)
 
 
+
 class Model1Admin(admin.ModelAdmin):
 
     def image_tag(self, obj):

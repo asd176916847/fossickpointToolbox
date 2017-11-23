@@ -124,7 +124,13 @@
                             <div class="row userInfo">
                                 <!--assigned program list-->
                                 <ul class="am-list am-list-static">
-                                    <li><span><a href="">program1</a></span> <button style="margin-left:70%" class="am-btn am-btn-default am-btn-danger">delete</button></li>
+                                    {% if user.programs.all %}
+                                    {% for program in user.programs.all %}
+                                    <li><span><a href="{% url 'programdetail' programID=program.id %}">{{program.name}}</a></span> <button style="margin-left:70%" class="am-btn am-btn-default am-btn-danger" onclick="removeProgram({{program.id}})" type="button">remove</button></li>
+                                    {% endfor %}
+                                    {% else %}
+                                    <li>No program is assigned to the user.</li>
+                                    {% endif %}
                                 </ul>
                             </div>
                             <div class = "row userInfo">
@@ -176,7 +182,7 @@
                                      <div class="row">
 
                                      </div>
-                                     <li><span style="width:70px; float:left"><a href="{% url 'programdetail' programID=program.id %}" >{{program.name}}</a></span><button class="am-btn am-btn-default am-btn-danger" style="margin-left:60%">Assign</button>
+                                     <li><span style="width:70px; float:left"><a href="{% url 'programdetail' programID=program.id %}" >{{program.name}}</a></span><button class="am-btn am-btn-default am-btn-danger" style="margin-left:60%" onclick="assignProgram({{program.id}})" type="button">Assign</button>
 </li>
                                     {% endfor %}
 
