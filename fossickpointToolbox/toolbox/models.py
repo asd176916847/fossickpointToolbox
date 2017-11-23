@@ -12,6 +12,15 @@ class User(models.Model):
     def __str__(self):
         return self.userName
 
+ # profile model
+class Profile(models.Model):
+    profileName = models.TextField(max_length=100)
+
+    def __str__(self):  # __unicode__ on Python 2
+        return self.profileName
+
+    class Meta:
+        ordering = ('profileName',)
 # user personal info model
 class PersonalInfo(models.Model):
     user = models.ForeignKey(User)
@@ -19,20 +28,19 @@ class PersonalInfo(models.Model):
     age = models.IntegerField(default=20)
     hobby = models.CharField(max_length=100)
     email = models.EmailField()
-    note = models.CharField(max_length=300,default='')
+    name = models.CharField(max_length=100,default='')
+    note = models.CharField(max_length=300,null=True, blank=True)
     # todo
     # add more detail information such as country, city, job
+    nation = models.CharField(max_length=100,null=True, blank=True)
+    city = models.CharField(max_length=100,null=True, blank=True)
+    occupation = models.CharField(max_length=100,null=True, blank=True)
+    address = models.CharField(max_length=200,null=True, blank=True)
+    profile = models.ManyToManyField(Profile)
     def __str__(self):
         return self.user.userName
 
-# profile model
-class Profile(models.Model):
-    profileName = models.TextField(max_length=100)
-    def __str__(self):              # __unicode__ on Python 2
-        return self.profileName
 
-    class Meta:
-        ordering = ('profileName',)
 
 # content model
 class Content(models.Model):
@@ -50,7 +58,7 @@ class Content(models.Model):
     address = models.FileField(upload_to='contents/')
     def __str__(selfs):
         return selfs.name
-
+    # convert the model to dict
     def __iter__(self):
         yield 'name', self.name
         yield 'focus', self.focus
@@ -58,6 +66,7 @@ class Content(models.Model):
         yield 'thumbnail', self.thumbnail.url
         yield 'id', self.id
         yield 'profileText', self.profileText
+        yield 'keyword', self.keyword
 
 
 # doesn't need now
@@ -79,7 +88,8 @@ class Program(models.Model):
     name = models.CharField(max_length=100)
     describe = models.CharField(max_length=200)
     contentsNumber = models.IntegerField(default=0)
-
+    def __str__(self):
+        return self.name
 # program detail model
 class ProgramDetail(models.Model):
     content = models.ForeignKey(Content)

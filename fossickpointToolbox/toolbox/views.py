@@ -5,14 +5,17 @@ from django.core import serializers
 from .forms import UploadFileForm, ContentForm
 from django.shortcuts import render, redirect
 from django.template import loader
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import User,PersonalInfo,Content,Profile,Program,ProgramDetail
 from django.http import JsonResponse
 from django.db.models import Q
 
 # /index
 def index(request):
-    return render(request,"toolbox/index.html")
+    if 'uuid' in request.session:
+            return HttpResponseRedirect('home')
+    else:
+        return render(request,"toolbox/index.html")
 
 # /login
 def user_login(request):
@@ -50,28 +53,28 @@ def user_register(request):
 
             user.save()
             if (gender == "male"):
-                personalInfo = PersonalInfo(user=user,gender=0)
+                personalInfo = PersonalInfo(user=user,gender=0,name=userName)
             else:
-                personalInfo = PersonalInfo(user=user,gender=1)
+                personalInfo = PersonalInfo(user=user,gender=1,name=userName)
             personalInfo.save()
             return JsonResponse({"status": 1})
     return render(request,"toolbox/register.html")
 
 # /home
 def user_home(request):
-     try:
-        user = User.objects.get(id = request.session['uuid'])
-        if (user.userType == 0):
-            response = ""
-            info = {'userName' : user.userName,'contentCount' : Content.objects.count(), 'userCount' : User.objects.filter(userType=1).count(), 'programCount': Program.objects.count()}
+     # try:
+    user = User.objects.get(id = request.session['uuid'])
+    if (user.userType == 0):
+        response = ""
+        info = {'userName' : user.userName,'contentCount' : Content.objects.count(), 'userCount' : User.objects.filter(userType=1).count(), 'programCount': Program.objects.count()}
 
-            return render(request, "toolbox/homepage.html",info)
-        else:
+        return render(request, "toolbox/homepage.html",info)
+    else:
             # to do
             # user side
-            return HttpResponse("Welcome " + user.userName)
-     except:
-         return HttpResponse("You have not login")
+        return HttpResponse("Welcome " + user.userName)
+     # except:
+            # return HttpResponse("You have not login")
 
 # /content
 def content(request,contentID):
@@ -179,15 +182,24 @@ def search(focus, tag, profilesText):
     if tag != "All tags":
         q = q.filter(tag=tag)
     if profilesText[0] != "All profiles":
-        q2 = Content.objects.filter(tag="null")
+    #     q2 = Content.objects.filter(tag="null")
+        profileList = []
         for profileText in profilesText:
             aProfile = Profile.objects.get(profileName=profileText)
-            q3 = q.filter(profile=aProfile)
-            q2 = chain(q3, q2)
-        q = set(q2)
+            profileList.append(aProfile)
+    #         q3 = q.filter(profile=aProfile)
+    #         q2 = chain(q3, q2)
+    #     q = set(q2)
+        queries = [Q(profile=profile) for profile in profileList]
+        query = queries.pop()
+
+        for item in queries:
+            query |= item
+        q = q.filter(query)
     contentList = q
     list = [];
-    for content in contentList.values():
+    for content in contentList:
+        content = dict (content)
         content["thumbnail"] = content["thumbnail"].split("/")[1]
         list.append(content)
     return list
@@ -212,7 +224,14 @@ def programs(request):
                 ProgramDetail.objects.filter(program=aProgram).delete()
                 aProgram.delete()
                 return JsonResponse({"status" : 1})
-
+        if request.GET.get('keywordSearch'):
+            keyword = request.GET.get('keywordSearch')
+            programList = Program.objects.filter(Q(name__contains = keyword) | Q(describe__contains = keyword))
+            list = []
+            for program in programList.values():
+                list.append(program)
+            context = {'programList':list}
+            return render(request,"toolbox/programs.html", context)
 
         programList = Program.objects.all().values()
         context = {'programList':programList}
@@ -224,21 +243,6 @@ def programs(request):
 def program(request, programID):
     if 'uuid' in request.session:
         aProgram = Program.objects.get(id=programID)
-        contentList = list(Content.objects.all())
-        programDetails = ProgramDetail.objects.filter(program=aProgram).order_by("order")
-        programContents = []
-        for programDetail in programDetails:
-            aContent = programDetail.content
-            aContentDict = dict(aContent)
-            aContentDict["thumbnail"] = aContentDict["thumbnail"].split("/")[1]
-            programContents.append(aContentDict)
-            contentList.remove(aContent)
-        contentDictList = []
-        for content in contentList:
-            contentDict=dict(content)
-            contentDict["thumbnail"] = contentDict["thumbnail"].split("/")[1]
-            contentDictList.append(contentDict)
-
         if (request.method) == 'POST':
             operation = request.POST.get('operation')
             if operation == 'update':
@@ -278,16 +282,70 @@ def program(request, programID):
                 aProgram.update(contentsNumber=order + 1)
                 return JsonResponse({"status" : 1})
 
-
+        if request.GET.get('focusSearch'):
+            focus = request.GET.get('focusSearch')
+            profile = request.GET.getlist('profileSearch')
+            tag = request.GET.get('tagSearch')
+            contentList = search(focus, tag, profile)
+            programDetails = ProgramDetail.objects.filter(program=aProgram).order_by("order")
+            programContents = []
+            for programDetail in programDetails:
+                aContent = programDetail.content
+                aContentDict = dict(aContent)
+                aContentDict["thumbnail"] = aContentDict["thumbnail"].split("/")[1]
+                programContents.append(aContentDict)
+                if aContentDict in contentList:
+                    contentList.remove(aContentDict)
+            contentDictList = contentList
+        else:
+            contentList = list(Content.objects.all())
+            programDetails = ProgramDetail.objects.filter(program=aProgram).order_by("order")
+            programContents = []
+            for programDetail in programDetails:
+                aContent = programDetail.content
+                aContentDict = dict(aContent)
+                aContentDict["thumbnail"] = aContentDict["thumbnail"].split("/")[1]
+                programContents.append(aContentDict)
+                if aContent in contentList:
+                    contentList.remove(aContent)
+            contentDictList = []
+            for content in contentList:
+                contentDict=dict(content)
+                contentDict["thumbnail"] = contentDict["thumbnail"].split("/")[1]
+                contentDictList.append(contentDict)
         context = {'programID': programID,'contentList':contentDictList, 'program': programContents,'programName': aProgram.name}
         return render(request, "toolbox/program.html", context)
     else:
         return HttpResponse("You have not login")
-def user(request):
-    if 'uuid' in request.session:
 
-        studentList = User.objects.filter(userType=1)
-        return render(request,"toolbox/user.html",{'studentList':studentList})
+def users(request):
+    # if 'uuid' in request.session:
+    #
+    #     studentList = User.objects.filter(userType=1)
+    #     return render(request, "toolbox/users.html",{'studentList':studentList})
+    return HttpResponseRedirect("/toolbox/user/1")
+
+def user(request,userID=1):
+    if 'uuid' in request.session:
+        if (request.method) == 'POST':
+            operation = request.POST.get("operation")
+            if operation == "update":
+                profile = request.POST.get("profile")
+                note = request.POST.get("note")
+                personalInfo = PersonalInfo.objects.get(id=userID)
+                personalInfo.note = note
+                personalInfo.profile.clear()
+                profiles = profile.split(';')
+                for aProfile in profiles:
+                    if aProfile != '':
+                        personalInfo.profile.add(Profile.objects.get(profileName=aProfile))
+                personalInfo.save()
+                return JsonResponse({"status": 1})
+
+        studentList = PersonalInfo.objects.filter(user__userType=1)
+        programList = Program.objects.all().values()
+        user = PersonalInfo.objects.get(id=userID)
+        return render(request,"toolbox/user.html",{'studentList':studentList, 'programList':programList, 'user':user})
 
     else:
         return HttpResponse("You have not login")

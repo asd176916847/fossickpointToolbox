@@ -85,7 +85,7 @@ $(document).ready(function(){
             success:function (arg) {
                 if (arg["status"] == "1")
                 {
-                    alert("create program successfully");
+                    alert("Program created successfully");
                     window.location.href='../programs';
 
                 }
@@ -97,6 +97,22 @@ $(document).ready(function(){
             }
         });
     });
+//    $("#search").click(function(){
+//        var form = new FormData();
+//        form.append("operation","search");
+//        form.append("keyword",$("#keywordSearch").val());
+//        $.ajax({
+//            type:'POST',
+//            url: '../programs/',
+//            data:form,
+//            processData:false,
+//            contentType:false,
+//
+//        success:function (arg) {
+//
+//        }
+//        })
+//    })
 
 
 

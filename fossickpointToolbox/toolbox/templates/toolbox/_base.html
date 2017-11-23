@@ -63,7 +63,7 @@
                     </a>
                 </li>
                 <li class="sidebar-nav-link">
-                    <a href="{% url 'user' %}" id="userManagement">
+                    <a href="{% url 'users' %}" id="userManagement">
                         <i class="am-icon-user sidebar-nav-link-logo"></i> User management
                     </a>
                 </li>
@@ -82,11 +82,21 @@
 
             <div class="container-fluid am-cf">
                 <div class="row">
-                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-9">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-9  am-btn-group am-btn-group-xs">
                         <div class="page-header-heading"><span class="am-icon-home page-header-heading-icon"></span>{% block title %} Home {% endblock %} <small>Fossick toolbox system</small></div>
-                    </div>
-                </div>
 
+                    </div>
+                    <button id="return" onclick="goback()" class="am-btn am-btn-default">Return</button>
+
+                </div>
+                <!--<div class="row">-->
+                <!--</div>-->
+
+                <script type="text/javascript">
+                    function goback() {
+                        history.go(-1);
+                    }
+                </script>
             </div>
 
             {% block main %}
