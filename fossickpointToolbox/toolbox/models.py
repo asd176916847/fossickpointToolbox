@@ -57,7 +57,7 @@ class Content(models.Model):
     name = models.CharField(max_length=100)
     type_choice = (('doc','doc'),('pdf','pdf'),('image', 'image'),('video', 'video'),('audio', 'audio'),('other','other'))
     type = models.CharField(max_length=30,choices=type_choice)
-    focus_choice = (('Being','Emotional Intelligence'),('Belonging','Social Intelligence'),('Becoming','Self Actualization'))
+    focus_choice = (('Emotional Intelligence','Emotional Intelligence'),('Social Intelligence','Social Intelligence'),('Self Actualization','Self Actualization'))
     focus = models.CharField(max_length=30,choices=focus_choice,default='Emotional Intelligence')
     tag_choice = (('Images','Images'),('Formulas','Formulas'),('Activities','Activities'),('Skills','Skills'),('Social frameworks','Social frameworks'),('Concepts','Concepts'),('Myths & notions','Myths & notions'),('Principles','Principles'))
     tag = models.CharField(max_length=30,choices=tag_choice)
