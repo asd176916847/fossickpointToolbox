@@ -90,6 +90,33 @@ def content(request,contentID):
 
         # return content detail
         context = {"content" : content, "programList": programList}
+        if (request.method) == 'POST':
+            operation = request.POST.get("operation")
+            # update user profile and note
+            if operation == "update":
+                # Function update of files has not been finished yet
+                # file = request.POST.get("file")
+                # thumbnail = request.POST.get("thumbnail")
+                name = request.POST.get("title")
+                type = request.POST.get("type")
+                tag = request.POST.get("tag")
+                profile = request.POST.get("profile")
+                focus = request.POST.get("focus")
+                keyword = request.POST.get("keyword")
+
+                content.name = name
+                content.type = type
+                content.tag = tag
+                content.focus = focus
+                content.keyword = keyword
+                content.profile.clear()
+                profiles = profile.split(';')
+                for aProfile in profiles:
+                    if aProfile != '':
+                        content.profile.add(Profile.objects.get(profileName=aProfile))
+                content.save()
+                return JsonResponse({"status": 1})
+            # remove assigned program
         #todo
         #content preview
         return render(request, "toolbox/content.html", context)

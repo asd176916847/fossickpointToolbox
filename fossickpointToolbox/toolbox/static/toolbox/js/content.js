@@ -40,20 +40,43 @@ function deleteContent(id)
     })
 }
 
-function editContent(id)
+function updateContent()
 {
+    // var fileobj = $("#doc-form-file")[0].files[0];
+    // var fileobj2 = $("#doc-form-thumbnail")[0].files[0];
+    var form = new FormData();
+    form.append('operation', 'update');
+    // form.append('file', fileobj);
+    // form.append('thumbnail', fileobj2);
+    form.append('title', $("#contentName").val());
+    form.append('type', $("#contentType").val());
+    form.append('tag', $("#contentTag").val());
+    form.append('keyword', $("#contentDiscription").val());
+    form.append('focus', $("#contentFocus").val());
+    var profile = "";
+    $('input[type="checkbox"][name="chk"]:checked').each(
+        function () {
+            profile = profile + $(this).val() + ";";
+        }
+    );
+    profile = profile.substring(0, profile.length - 1)
+    alert(profile)
+    form.append('profile', profile);
+    $.ajax({
+        type: 'POST',
+        url: location.href,
+        data: form,
+        processData: false,  // 告诉jquery不转换数据
+        contentType: false,  // 告诉jquery不设置内容格式
 
-    $.post('./contents',{'operation':'require','id':id},function (result){
-        if (result["status"] == 1)
-        {
-            layer.open({
-                type: 1,
-                area: ['600px', '700px'],
-                title: 'Edit content',
-                shadeClose: false, //点击遮罩关闭
-                content: $('#editContent')
-            });
-            // window.location.href='../content';
+        success: function (arg) {
+            if (arg["status"] == "1") {
+                alert("Update content details successfully");
+                location.reload();
+            }
+            else {
+                alert("Update content details failed!!");
+            }
         }
     })
 }
@@ -92,6 +115,50 @@ function search() {
 $(document).ready(function() {
     //打开弹出窗口
     //按钮点击事件!
+    $("#update").click(function(){
+            alert("hello world!")
+            console.log("hello world!")
+            // var fileobj = $("#doc-form-file")[0].files[0];
+            // var fileobj2 = $("#doc-form-thumbnail")[0].files[0];
+            var form = new FormData();
+            form.append('operation', 'update');
+            // form.append('file', fileobj);
+            // form.append('thumbnail', fileobj2);
+            form.append('title', $("#title1").val());
+            form.append('type', $("#selectedType1").val());
+            form.append('tag', $("#tag1").val());
+            form.append('keyword', $("#keyword1").val());
+            form.append('focus', $("#focus1").val());
+            var profile = "";
+            $('input[type="checkbox"][name="chk"]:checked').each(
+                function () {
+                    profile = profile + $(this).val() + ";";
+                }
+            );
+            profile = profile.substring(0, profile.length - 1)
+            form.append('profile', profile);
+            $.ajax({
+                type: 'POST',
+                url: location.href,
+                data: form,
+                processData: false,  // 告诉jquery不转换数据
+                contentType: false,  // 告诉jquery不设置内容格式
+
+                success: function (arg) {
+                    if (arg["status"] == "1") {
+                        alert("Update content details successfully");
+                        location.reload();
+                    }
+                    else {
+                        alert("Update content details failed!!");
+                    }
+                }
+            })
+
+            // $("#reset").click(function () {
+            //     clearUploadForm();
+            // });
+        });
     $("#add").click(function () {
         //调用函数居中窗口
         layer.open({
@@ -142,50 +209,8 @@ $(document).ready(function() {
                 }
             }
         })
-   })
+   });
         // post /content/id update
-        $("#update").click(function () {
-            var fileobj = $("#doc-form-file")[0].files[0];
-            var fileobj2 = $("#doc-form-thumbnail")[0].files[0];
-            var form = new FormData();
-            form.append('operation', 'edit');
-            form.append('file', fileobj);
-            form.append('thumbnail', fileobj2);
-            form.append('title', $("#title1").val());
-            form.append('type', $("#selectedType1").val());
-            form.append('tag', $("#tag1").val());
-            form.append('keyword', $("#keyword1").val());
-            form.append('focus', $("#focus1").val());
-            var profile = "";
-            $('input[type="checkbox"][name="chk"]:checked').each(
-                function () {
-                    profile = profile + $(this).val() + ";";
-                }
-            );
-            profile = profile.substring(0, profile.length - 1)
-            form.append('profile', profile);
-            $.ajax({
-                type: 'POST',
-                url: '../contents/',
-                data: form,
-                processData: false,  // 告诉jquery不转换数据
-                contentType: false,  // 告诉jquery不设置内容格式
 
-                success: function (arg) {
-                    if (arg["status"] == "1") {
-                        alert("Update content details successfully");
-                        window.location.href = '../contents';
-                    }
-                    else {
-                        alert("Update content details, please finish the form");
-                        clearUploadForm();
-                    }
-                }
-            })
-
-            $("#reset").click(function () {
-                clearUploadForm();
-            });
-        });
 
 })

@@ -2,6 +2,7 @@
 <!-- <script src="{% static 'toolbox/js/jquery.sortable.js' %}"></script> -->
 <script src="//cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 <script src="{% static 'toolbox/js/program.js' %}"></script>
+<script src="{% static 'toolbox/js/content.js' %}"></script>
 
 <div class="row-content am-cf">
     <div class="row am-cf">
@@ -141,7 +142,7 @@
                                             <input type="checkbox" value="Extrovert" data-am-ucheck id="Extrovert1" name="chk">Extrovert
                                         </label>
                                         <label class="am-checkbox-inline">
-                                            <input type="checkbox" value="Introvert/extrovert" data-am-ucheck id="Intorvert/extrovert1" name="chk">Introvert/extrovert
+                                            <input type="checkbox" value="Introvertorextrovert" data-am-ucheck id="Introvertorextrovert" name="chk">Introvert or extrovert
                                         </label>
                                     </div>
                                 </div>
@@ -173,7 +174,11 @@
                             <textarea class="" rows="5" id="contentDiscription">{{content.keyword}}</textarea>
                         </div>
                         <div class="row">
-                            <p style="margin-left:40%" class="am-u-lg-12"><button type="button" class="am-btn am-btn-danger">update</button></p>
+                            <p style="margin-left:40%" class="am-u-lg-12">
+                                <button type="button" name="setting" id="update" class="am-btn am-btn-default am-btn-danger" onclick="updateContent()">
+                                    Update
+                                </button>
+                            </p>
                         </div>
                     </div>
 
