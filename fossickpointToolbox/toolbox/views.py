@@ -85,8 +85,9 @@ def content(request,contentID):
         programdetails = ProgramDetail.objects.filter(content=content)
         programList = []
         for programdetail in programdetails:
-            program = programdetail.program
-            programList.append(program)
+            if programdetail.content == content:
+                program = programdetail.program
+                programList.append(program)
 
         # return content detail
         context = {"content" : content, "programList": programList}
