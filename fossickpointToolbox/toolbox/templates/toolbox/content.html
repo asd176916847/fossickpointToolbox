@@ -27,8 +27,8 @@
                                     <button type="button" class="am-btn am-btn-danger am-btn-sm">
                                         <i class="am-icon-cloud-upload"></i> Please select file to upload
                                     </button>
+                                    <input type="file" id="update-file"><span><p id="update-file-list"></p></span>                               
                                 </div>
-                                <input type="file" id="doc-ipt-file-2">
                             </div>
                             <div class="am-form-group am-form-file am-u-lg-6">
                                 <label for="doc-ipt-file-2">Content thumbnail</label>
@@ -36,8 +36,28 @@
                                     <button type="button" class="am-btn am-btn-danger am-btn-sm">
                                         <i class="am-icon-cloud-upload"></i> Please select thumbnail to upload
                                     </button>
+                                    <input type="file" id="update-thumbnail-file"><span><p id="update-thumbnail-list"></p></span>                                
                                 </div>
-                                <input type="file" id="thumbnail-file">
+                                <script>
+                                    $(function () {
+                                        $('#update-file').on('change', function () {
+                                            var fileNames = '';
+                                            $.each(this.files, function () {
+                                                fileNames += '<span class="am-badge">' + this.name + '</span> ';
+                                            });
+                                            $('#update-file-list').html(fileNames);
+                                        });
+                                    });
+                                    $(function () {
+                                        $('#update-thumbnail-file').on('change', function () {
+                                            var fileNames = '';
+                                            $.each(this.files, function () {
+                                                fileNames += '<span class="am-badge">' + this.name + '</span> ';
+                                            });
+                                            $('#update-thumbnail-list').html(fileNames);
+                                        });
+                                    });
+                                </script>
                             </div>
                         </div>
                         <div class="row">
@@ -142,7 +162,7 @@
                                             <input type="checkbox" value="Extrovert" data-am-ucheck id="Extrovert1" name="chk">Extrovert
                                         </label>
                                         <label class="am-checkbox-inline">
-                                            <input type="checkbox" value="Introvertorextrovert" data-am-ucheck id="Introvertorextrovert" name="chk">Introvert or extrovert
+                                            <input type="checkbox" value="Introvertorextrovert" data-am-ucheck id="Introvert/extrovert" name="chk">Introvert/extrovert
                                         </label>
                                     </div>
                                 </div>
@@ -163,6 +183,8 @@
                             {% for profile in content.profile.all %}
                                 <script type="text/javascript">
                                     var profile = "{{profile}}"
+                                    if (profile == "Introvert/extrovert")
+                                        profile = "Introvertorextrovert";
                                     $(`input[value=${profile}]`).prop('checked', true);
                                 </script>
                             {% endfor %}

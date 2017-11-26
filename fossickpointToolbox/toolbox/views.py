@@ -79,8 +79,6 @@ def user_home(request):
 # /content
 def content(request,contentID):
     if 'uuid' in request.session:
-        # todo
-        # update content
         content = Content.objects.get(id=contentID)
         programdetails = ProgramDetail.objects.filter(content=content)
         programList = []
@@ -112,12 +110,29 @@ def content(request,contentID):
                 content.keyword = keyword
                 content.profile.clear()
                 profiles = profile.split(';')
+                profile = ''
                 for aProfile in profiles:
                     if aProfile != '':
-                        content.profile.add(Profile.objects.get(profileName=aProfile))
+                        if aProfile == 'Introvertorextrovert':
+                            profile = 'Introvert/extrovert'
+                        else:
+                            profile = aProfile
+                        content.profile.add(Profile.objects.get(profileName=profile))
+                if 'file' in request.FILES:
+                    os.remove(content.address.name)
+                    content.address = request.FILES['file']
+                    
+                defaultThumbnail = ['contents/pdf.png', 'contents/audio.png', 'contents/doc.png', 'contents/image.png', 'contents/ppt.png', 'contents/vedio.png', 'contents/other.png']                                   
+                if 'thumbnail' in request.FILES:
+                    if content.thumbnail.name not in defaultThumbnail:
+                        os.remove(content.thumbnail.name)
+                    content.thumbnail = request.FILES['thumbnail']
+                else:
+                    if content.thumbnail.name in defaultThumbnail:
+                        content.thumbnail = 'contents/' + type + '.png'
                 content.save()
                 return JsonResponse({"status": 1})
-            # remove assigned program
+
         #todo
         #content preview
         return render(request, "toolbox/content.html", context)
@@ -163,6 +178,17 @@ def contents(request):
                 content = Content.objects.get(id=request.POST.get('id'))
                 address = content.address
                 os.remove(address.name)
+                defaultThumbnail = ['contents/pdf.png', 'contents/audio.png', 'contents/doc.png', 'contents/image.png', 'contents/ppt.png', 'contents/vedio.png', 'contents/other.png']
+                if content.thumbnail.name not in defaultThumbnail:
+                    os.remove(content.thumbnail.name)
+                relatedProgramDetail = ProgramDetail.objects.filter(content=content)
+                relatedProgram = []
+                for programdetail in relatedProgramDetail:
+                    program = programdetail.program
+                    relatedProgram.append(program)
+                for program in relatedProgram:
+                    program.contentsNumber -= 1
+                    program.save()
                 content.delete()
                 return JsonResponse({"status":1})
             # search content
@@ -194,10 +220,13 @@ def contents(request):
                 context = {'contentList':list}
                 return render(request, "toolbox/contents.html", context)
 
-        contentList = Content.objects.all().values()
+        contentList = Content.objects.all()
+        contentList2 = []
         for content in contentList:
+            content = dict(content)
             content["thumbnail"] = content["thumbnail"].split("/")[1]
-        context = {'contentList':contentList}
+            contentList2.append(content)
+        context = {'contentList':contentList2}
         return render(request,"toolbox/contents.html",context)
     else:
         return HttpResponse("You have not login")

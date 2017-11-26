@@ -77,6 +77,7 @@ class Content(models.Model):
         yield 'id', self.id
         yield 'profileText', self.profileText
         yield 'keyword', self.keyword
+        yield 'profile', self.profile.all().values()
 
 
 # doesn't need now

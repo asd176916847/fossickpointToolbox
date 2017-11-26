@@ -114,22 +114,21 @@
                                     <td><img src="../static/{{content.thumbnail}}" style="width:50px; height:50px"> {{content.name}}</td>
                                     <td>{{content.focus}}</td>
                                     <td>{{content.tag}}</td>
-                                    <td>{{content.profileText}}</td>
-                                    <!--<td id="profileText">-->
-                                        <!--<script type="text/javascript">-->
-                                            <!--var profileText;-->
-                                        <!--</script>-->
-                                        <!--{% for profile in content.profile.all %}-->
-                                            <!--<script type="text/javascript">-->
-                                                <!--var profile = "{{profile}}"-->
-                                                <!--profileText+=profile-->
-                                                <!--alert(profile)-->
-                                            <!--</script>-->
-                                        <!--{% endfor %}-->
-                                        <!--<script type="text/javascript">-->
-<!--//                                            alert(profileText)-->
-                                            <!--document.getElementById("profileText").innerHTML=profileText-->
-                                        <!--</script>-->
+                                    <!-- <td>{{content.profileText}}</td> -->
+                                    <td id="profileText{{content.id}}">
+                                        <script type="text/javascript">
+                                            profileText = "";
+                                        </script>
+                                        {% for profile in content.profile.all %}
+                                            <script type="text/javascript">
+                                                var profile = "{{profile.profileName}}"
+                                                profileText+=profile + ";";
+                                            </script>
+                                        {% endfor %}
+                                        <script type="text/javascript">
+                                            $("#profileText").val(profileText);
+                                            document.getElementById("profileText{{content.id}}").innerHTML=profileText
+                                        </script>
                                     <!--</td>-->
                                     <td>{{content.keyword}}</td>
                                     <td>
@@ -440,7 +439,7 @@
                                 <option value="doc">doc</option>
                                 <option value="pdf" selected>pdf</option>
                                 <option value="image">image</option>
-                                <option value="video">vedio</option>
+                                <option value="video">video</option>
                                 <option value="audio">audio</option>
                                 <option value="other">other</option>
                             </select>

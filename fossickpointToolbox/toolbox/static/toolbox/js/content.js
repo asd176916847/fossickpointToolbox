@@ -42,12 +42,12 @@ function deleteContent(id)
 
 function updateContent()
 {
-    // var fileobj = $("#doc-form-file")[0].files[0];
-    // var fileobj2 = $("#doc-form-thumbnail")[0].files[0];
+    var updatefile = $("#update-file")[0].files[0];
+    var updatethumbnail = $("#update-thumbnail-file")[0].files[0];
     var form = new FormData();
     form.append('operation', 'update');
-    // form.append('file', fileobj);
-    // form.append('thumbnail', fileobj2);
+    form.append('file', updatefile);
+    form.append('thumbnail', updatethumbnail);
     form.append('title', $("#contentName").val());
     form.append('type', $("#contentType").val());
     form.append('tag', $("#contentTag").val());
@@ -60,7 +60,6 @@ function updateContent()
         }
     );
     profile = profile.substring(0, profile.length - 1)
-    alert(profile)
     form.append('profile', profile);
     $.ajax({
         type: 'POST',
@@ -113,17 +112,14 @@ function search() {
     })
 }
 $(document).ready(function() {
-    //打开弹出窗口
-    //按钮点击事件!
+
     $("#update").click(function(){
-            alert("hello world!")
-            console.log("hello world!")
-            // var fileobj = $("#doc-form-file")[0].files[0];
-            // var fileobj2 = $("#doc-form-thumbnail")[0].files[0];
+            var fileobj = $("#doc-form-file")[0].files[0];
+            var fileobj2 = $("#doc-form-thumbnail")[0].files[0];
             var form = new FormData();
             form.append('operation', 'update');
-            // form.append('file', fileobj);
-            // form.append('thumbnail', fileobj2);
+            form.append('file', fileobj);
+            form.append('thumbnail', fileobj2);
             form.append('title', $("#title1").val());
             form.append('type', $("#selectedType1").val());
             form.append('tag', $("#tag1").val());

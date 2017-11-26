@@ -2,3 +2,6 @@
 *.db
 *.pyc
 *.log
+db.sqlite3
+contents/
+
