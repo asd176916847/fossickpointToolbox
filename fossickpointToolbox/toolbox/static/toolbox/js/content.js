@@ -80,6 +80,23 @@ function updateContent()
     })
 }
 
+function filePreview(fileaddress) {
+    var form = new FormData();
+    form.append("fileaddress", fileaddress);
+    $.ajax({
+        type:'POST',
+        url:'../preview/',
+        data:form,
+        processData:false,  // 告诉jquery不转换数据
+        contentType:false,  // 告诉jquery不设置内容格式
+
+        success:function (data) {
+            var iframe = $('<iframe>');
+            iframe.attr('src','/pdf/yourpdf.pdf?options=first&second=here');
+            $('#targetDiv').append(iframe);
+        }
+    })   
+}
 function clearUploadForm() {
     $("#title").val("");
     $("#tag").val("");
@@ -150,11 +167,10 @@ $(document).ready(function() {
                     }
                 }
             })
-
-            // $("#reset").click(function () {
-            //     clearUploadForm();
-            // });
         });
+    $("#reset").click(function () {
+        clearUploadForm();
+    });
     $("#add").click(function () {
         //调用函数居中窗口
         layer.open({

@@ -9,7 +9,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import User,PersonalInfo,Content,Profile,Program,ProgramDetail
 from django.http import JsonResponse
 from django.db.models import Q
-
+import codecs
+from django.utils.encoding import smart_str
 # /index
 def index(request):
     if 'uuid' in request.session:
@@ -121,7 +122,7 @@ def content(request,contentID):
                 if 'file' in request.FILES:
                     os.remove(content.address.name)
                     content.address = request.FILES['file']
-                    
+
                 defaultThumbnail = ['contents/pdf.png', 'contents/audio.png', 'contents/doc.png', 'contents/image.png', 'contents/ppt.png', 'contents/vedio.png', 'contents/other.png']                                   
                 if 'thumbnail' in request.FILES:
                     if content.thumbnail.name not in defaultThumbnail:
@@ -423,4 +424,27 @@ def user(request,userID=1):
     else:
         return HttpResponse("You have not login")
 
-
+def preview(request, contentID):
+    content = Content.objects.get(id=contentID)
+    fileaddress = content.address.name
+    if content.type == 'pdf':
+        with open(fileaddress, 'rb',) as pdf:
+            response = HttpResponse(pdf.read(), content_type='application/pdf')
+            response['Content-Disposition'] = 'inline;filename=some_file.pdf'
+            return response
+        pdf.closed
+    elif content.type == 'image':
+        with open(fileaddress, 'rb',) as image:
+            response = HttpResponse(image.read(), content_type='image/jpeg')
+            response['Content-Disposition'] = 'inline;filename=some_file'
+            return response
+        image.closed
+    elif content.type == 'video':
+        return HttpResponseRedirect("../../static/" + os.path.basename(fileaddress))
+    elif content.type == 'audio':
+        return HttpResponseRedirect("../../static/" + os.path.basename(fileaddress))        
+    else:
+        with open(fileaddress, 'rb',) as image:
+            response = HttpResponse(image.read(), content_type='application/force-download')
+            response['Content-Disposition'] = 'inline;filename=%s' % smart_str(os.path.basename(fileaddress))
+        return response

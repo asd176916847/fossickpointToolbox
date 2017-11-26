@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^programs/',views.programs,name="program"),
     url(r'^program/(?P<programID>[0-9]+)/$',views.program,name="programdetail"),
     url(r'logout/',views.logout,name="logout"),
+    url(r'^preview/(?P<contentID>[0-9]+)/$', views.preview, name="preview"),
 ]
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 

@@ -78,6 +78,7 @@ class Content(models.Model):
         yield 'profileText', self.profileText
         yield 'keyword', self.keyword
         yield 'profile', self.profile.all().values()
+        yield 'address', self.address.url
 
 
 # doesn't need now

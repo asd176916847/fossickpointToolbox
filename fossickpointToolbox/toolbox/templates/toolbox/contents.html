@@ -110,8 +110,7 @@
                             <tbody id="contentTable">
                                 {% if contentList %} {% for content in contentList %}
                                 <tr class="gradeX">
-
-                                    <td><img src="../static/{{content.thumbnail}}" style="width:50px; height:50px"> {{content.name}}</td>
+                                    <td><img src="../static/{{content.thumbnail}}" style="width:50px; height:50px"><a href="{% url 'preview' contentID=content.id %}" target="view_window">{{content.name}}</a> </td>
                                     <td>{{content.focus}}</td>
                                     <td>{{content.tag}}</td>
                                     <!-- <td>{{content.profileText}}</td> -->
@@ -590,4 +589,5 @@
         <!--</form>-->
     </div>
 </div>
+<div class="targetDiv"></div>
 {% endblock %}
