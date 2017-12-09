@@ -7,7 +7,7 @@ class User(models.Model):
     userPassword = models.CharField(max_length=30)
     # todo
     # change userType to 4 levels. 0: admin 1: user who can visit trail content;  2: user who can visit all content; 3: user who can have tailor program
-    userType = models.IntegerField(default=1)  #0: admin 1:user
+    userType = models.IntegerField(default=1)  #0: admin 1:unactivated 2: trail 3: unlimited 4: personalized
 
     def __str__(self):
         return self.userName
@@ -50,8 +50,13 @@ class PersonalInfo(models.Model):
     def __str__(self):
         return self.user.userName
 
-
-
+# content category
+# todo enable sub category it is difficult in showing the structure on the HTML page.
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    # belongto = models.ForeignKey('self', blank='True', null='True')
+    def __str__(self):
+        return self.name
 # content model
 class Content(models.Model):
     name = models.CharField(max_length=100)
@@ -66,6 +71,9 @@ class Content(models.Model):
     profileText = models.TextField(max_length=100,default='')
     keyword = models.CharField(max_length=100)
     address = models.FileField(upload_to='contents/')
+    category = models.ForeignKey(Category, blank='True', null='True')
+    # define content level corresponding to user type
+    level = models.IntegerField(default=1) # 1: free content; 2: limited; 3: personlized
     def __str__(selfs):
         return selfs.name
     # convert the model to dict
@@ -77,7 +85,7 @@ class Content(models.Model):
         yield 'id', self.id
         yield 'profileText', self.profileText
         yield 'keyword', self.keyword
-        yield 'profile', self.profile.all().values()
+        yield 'profile', self.profile.all()
         yield 'address', self.address.url
 
 

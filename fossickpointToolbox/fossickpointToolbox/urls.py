@@ -19,4 +19,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^toolbox/', include ('toolbox.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^toolbox_user/',include('toolbox_user.urls'))
 ]

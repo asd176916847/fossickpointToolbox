@@ -352,8 +352,12 @@ def program(request, programID):
                 aContentDict = dict(aContent)
                 aContentDict["thumbnail"] = aContentDict["thumbnail"].split("/")[1]
                 programContents.append(aContentDict)
-                if aContentDict in contentList:
-                    contentList.remove(aContentDict)
+                for contentDict in contentList:
+                    if equalContentDict(aContentDict, contentDict):
+                        contentList.remove(contentDict)
+                        break
+                # if aContentDict in contentList:
+                #     contentList.remove(aContentDict)
             contentDictList = contentList
         else:
             contentList = list(Content.objects.all())
@@ -375,7 +379,11 @@ def program(request, programID):
         return render(request, "toolbox/program.html", context)
     else:
         return HttpResponse("You have not login")
-
+def equalContentDict(dict1, dict2):
+    if dict1["id"] == dict2["id"]:
+        return True
+    else:
+        return False
 def users(request):
     # if 'uuid' in request.session:
     #
