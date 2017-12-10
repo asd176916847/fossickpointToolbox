@@ -14,9 +14,9 @@ from django.utils.encoding import smart_str
 # /index
 def index(request):
     if 'uuid' in request.session:
-            return HttpResponseRedirect('home')
+        return HttpResponseRedirect('home')
     else:
-        return render(request,"toolbox/index.html")
+        return render(request, "toolbox/index.html")
 
 # /login
 def user_login(request):
@@ -34,6 +34,43 @@ def user_login(request):
         else:
             return JsonResponse({"status": 1})
 
+''' 
+    api for validating user login on fossickpoint website
+    api/user/ POST username password 
+'''
+def api_user_validation(request):
+    if request.POST:
+        userName = request.POST.get('username')
+        password = request.POST.get('password')
+        try:
+            user = User.objects.get(userName = userName)
+        except:
+            return JsonResponse({"status": 0, "information": "unkown error"})
+        if (user is not None and user.userPassword == password):
+            personalInfo = PersonalInfo.objects.get(user = user)
+            nickname = personalInfo.name
+            return JsonResponse({"status": 1, "information": "login success","nickname": nickname, "userType": user.userType})
+        else:
+            return JsonResponse({"status": 0, "information": "username or passowrd is error"})
+
+''' 
+    api for setting userType on fossickpoint website when user paied for a plan
+    api/usertype/ POST username password userType
+'''
+def api_user_type(request):
+    if request.POST:
+        userName = request.POST.get('username')
+        password = request.POST.get('password')
+        try:
+            user = User.objects.get(userName = userName)
+        except:
+            return JsonResponse({"status": 0, "information": "unkown error"})
+        if (user is not None and user.userPassword == password):
+            user.userType = request.POST.get('userType')
+            user.save()
+            return JsonResponse({"status": 1, "information": "userType updated"})
+        else:
+            return JsonResponse({"status": 0, "information": "User account validates failed"})
 # /logout
 def logout(request):
     del request.session['uuid']
