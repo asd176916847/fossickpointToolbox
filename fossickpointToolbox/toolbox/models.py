@@ -87,6 +87,7 @@ class Content(models.Model):
         yield 'keyword', self.keyword
         yield 'profile', self.profile.all()
         yield 'address', self.address.url
+        yield 'category', self.category.name
 
 
 # doesn't need now

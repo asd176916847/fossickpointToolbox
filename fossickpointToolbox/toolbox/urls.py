@@ -19,7 +19,7 @@ urlpatterns = [
         views.program, name="programdetail"),
     url(r'logout/', views.logout, name="logout"),
     url(r'^preview/(?P<contentID>[0-9]+)/$', views.preview, name="preview"),
-    url(r'^api/user/', views.api_user_validation, name="api_login"),
+    url(r'^api/login/', views.api_user_validation, name="api_login"),
     url(r'^api/usertype/', views.api_user_type, name="api_usertype"),
 ]
 
